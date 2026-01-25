@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>삶의 태도 테스트 | 16가지 실존 유형</title>
+    <meta name="description" content="당신은 삶을 어떻게 바라보나요? 니체, 카뮈, 쇼펜하우어... 16가지 실존 유형 중 당신의 유형을 찾아보세요.">
+    <meta property="og:title" content="삶의 태도 테스트 | 16가지 실존 유형">
+    <meta property="og:description" content="당신은 삶을 어떻게 바라보나요? 16가지 실존 유형 중 당신의 유형을 찾아보세요.">
+    <meta property="og:url" content="https://hyungkwonko.info/mbti">
+    <meta property="og:type" content="website">
+    <meta name="author" content="Kwon Ko (고형권)">
+    <meta name="copyright" content="© 2025 Kwon Ko (고형권). All Rights Reserved.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Intro Section -->
+    <section id="intro" class="screen active">
+        <div class="intro-bg"></div>
+        <div class="container">
+            <div class="intro-content">
+                <div class="intro-badge">심리 테스트</div>
+                <h1 class="intro-title">나는 삶을<br>어떻게 살고 있을까</h1>
+                <p class="intro-desc">
+                    4가지 축 × 16가지 유형<br>
+                    나의 실존적 태도를 알아보는 테스트
+                </p>
+                <div class="intro-axes">
+                    <div class="axis-item">
+                        <span class="axis-label">욕망</span>
+                        <span class="axis-desc">삶을 어떻게 보고 싶은가</span>
+                    </div>
+                    <div class="axis-item">
+                        <span class="axis-label">실제</span>
+                        <span class="axis-desc">실제로 어떻게 경험하는가</span>
+                    </div>
+                    <div class="axis-item">
+                        <span class="axis-label">행동</span>
+                        <span class="axis-desc">세상에 어떻게 개입하는가</span>
+                    </div>
+                    <div class="axis-item">
+                        <span class="axis-label">표현</span>
+                        <span class="axis-desc">내면을 어떻게 다루는가</span>
+                    </div>
+                </div>
+                <button class="btn-start" onclick="startTest()">
+                    <span>시작하기</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </button>
+                <button class="btn-types" onclick="showAllTypes()">
+                    <span>16유형 미리보기</span>
+                </button>
+                <p class="intro-time">24문항 · 5분</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Test Section -->
+    <section id="test" class="screen">
+        <div class="container">
+            <div class="test-header">
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <span class="progress-text" id="progressText">1 / 24</span>
+                </div>
+            </div>
+            <div class="question-container" id="questionContainer">
+                <p class="question-number" id="questionNumber">Q1</p>
+                <h2 class="question-text" id="questionText"></h2>
+                <div class="answer-scale">
+                    <div class="scale-labels">
+                        <span>전혀 아니다</span>
+                        <span>매우 그렇다</span>
+                    </div>
+                    <div class="scale-buttons" id="scaleButtons">
+                        <button class="scale-btn" data-value="1">1</button>
+                        <button class="scale-btn" data-value="2">2</button>
+                        <button class="scale-btn" data-value="3">3</button>
+                        <button class="scale-btn" data-value="4">4</button>
+                        <button class="scale-btn" data-value="5">5</button>
+                        <button class="scale-btn" data-value="6">6</button>
+                        <button class="scale-btn" data-value="7">7</button>
+                    </div>
+                </div>
+            </div>
+            <div class="test-nav">
+                <button class="btn-nav btn-prev" id="btnPrev" onclick="prevQuestion()" disabled>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M19 12H5M12 19l-7-7 7-7"/>
+                    </svg>
+                    <span>이전</span>
+                </button>
+                <button class="btn-nav btn-next" id="btnNext" onclick="nextQuestion()" disabled>
+                    <span>다음</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Result Section -->
+    <section id="result" class="screen">
+        <div class="container">
+            <div class="result-header">
+                <p class="result-label">당신의 유형</p>
+                <h1 class="result-type" id="resultType">3-C</h1>
+                <h2 class="result-name" id="resultName">예술가/작가형</h2>
+                <p class="result-philosophy" id="resultPhilosophy">부조리 문학 (카뮈, 카프카)</p>
+            </div>
+
+            <div class="result-spectrum">
+                <h3 class="section-title">4축 스펙트럼</h3>
+                <div class="spectrum-grid">
+                    <div class="spectrum-item">
+                        <div class="spectrum-header">
+                            <span class="spectrum-name">욕망</span>
+                            <span class="spectrum-value" id="desireValue">32/42</span>
+                        </div>
+                        <div class="spectrum-bar-container">
+                            <span class="spectrum-label-left">부정</span>
+                            <div class="spectrum-bar">
+                                <div class="spectrum-fill" id="desireFill"></div>
+                                <div class="spectrum-marker" id="desireMarker"></div>
+                            </div>
+                            <span class="spectrum-label-right">긍정</span>
+                        </div>
+                        <p class="spectrum-desc" id="desireDesc">삶에서 의미를 찾고 싶어하는 욕구가 강합니다.</p>
+                    </div>
+                    <div class="spectrum-item">
+                        <div class="spectrum-header">
+                            <span class="spectrum-name">실제</span>
+                            <span class="spectrum-value" id="realityValue">18/42</span>
+                        </div>
+                        <div class="spectrum-bar-container">
+                            <span class="spectrum-label-left">부정</span>
+                            <div class="spectrum-bar">
+                                <div class="spectrum-fill" id="realityFill"></div>
+                                <div class="spectrum-marker" id="realityMarker"></div>
+                            </div>
+                            <span class="spectrum-label-right">긍정</span>
+                        </div>
+                        <p class="spectrum-desc" id="realityDesc">실제 경험은 기대에 못 미칩니다.</p>
+                    </div>
+                    <div class="spectrum-item">
+                        <div class="spectrum-header">
+                            <span class="spectrum-name">행동</span>
+                            <span class="spectrum-value" id="actionValue">20/42</span>
+                        </div>
+                        <div class="spectrum-bar-container">
+                            <span class="spectrum-label-left">소극</span>
+                            <div class="spectrum-bar">
+                                <div class="spectrum-fill" id="actionFill"></div>
+                                <div class="spectrum-marker" id="actionMarker"></div>
+                            </div>
+                            <span class="spectrum-label-right">적극</span>
+                        </div>
+                        <p class="spectrum-desc" id="actionDesc">세상에 소극적으로 개입합니다.</p>
+                    </div>
+                    <div class="spectrum-item">
+                        <div class="spectrum-header">
+                            <span class="spectrum-name">표현</span>
+                            <span class="spectrum-value" id="expressValue">35/42</span>
+                        </div>
+                        <div class="spectrum-bar-container">
+                            <span class="spectrum-label-left">숨김</span>
+                            <div class="spectrum-bar">
+                                <div class="spectrum-fill" id="expressFill"></div>
+                                <div class="spectrum-marker" id="expressMarker"></div>
+                            </div>
+                            <span class="spectrum-label-right">드러냄</span>
+                        </div>
+                        <p class="spectrum-desc" id="expressDesc">내면을 드러내는 편입니다.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="result-section">
+                <h3 class="section-title">유형 설명</h3>
+                <div class="type-description" id="typeDescription">
+                    <!-- Filled by JS -->
+                </div>
+            </div>
+
+            <div class="result-section">
+                <h3 class="section-title">강점과 약점</h3>
+                <div class="strength-weakness">
+                    <div class="sw-column">
+                        <h4 class="sw-title strength-title">강점</h4>
+                        <ul class="sw-list" id="strengthList">
+                            <!-- Filled by JS -->
+                        </ul>
+                    </div>
+                    <div class="sw-column">
+                        <h4 class="sw-title weakness-title">약점</h4>
+                        <ul class="sw-list" id="weaknessList">
+                            <!-- Filled by JS -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="result-section">
+                <h3 class="section-title">관계 궁합</h3>
+                <div class="compatibility" id="compatibilitySection">
+                    <!-- Filled by JS -->
+                </div>
+            </div>
+
+            <div class="result-section">
+                <h3 class="section-title">일상 패턴</h3>
+                <div class="daily-patterns" id="dailyPatterns">
+                    <!-- Filled by JS -->
+                </div>
+            </div>
+
+            <div class="result-section">
+                <h3 class="section-title">같은 유형의 인물들</h3>
+                <div class="famous-people" id="famousPeople">
+                    <!-- Filled by JS -->
+                </div>
+            </div>
+
+            <div class="result-section">
+                <h3 class="section-title">위험 신호</h3>
+                <div class="warning-signs" id="warningSigns">
+                    <!-- Filled by JS -->
+                </div>
+            </div>
+
+            <div class="result-section">
+                <h3 class="section-title">추천 콘텐츠</h3>
+                <div class="recommendations" id="recommendations">
+                    <!-- Filled by JS -->
+                </div>
+            </div>
+
+            <div class="result-actions">
+                <button class="btn-share" onclick="shareResult()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="18" cy="5" r="3"/>
+                        <circle cx="6" cy="12" r="3"/>
+                        <circle cx="18" cy="19" r="3"/>
+                        <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+                        <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+                    </svg>
+                    <span>결과 공유하기</span>
+                </button>
+                <button class="btn-retry" onclick="retryTest()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M1 4v6h6"/>
+                        <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/>
+                    </svg>
+                    <span>다시 하기</span>
+                </button>
+            </div>
+
+            <div class="explore-types">
+                <p>다른 유형도 궁금하다면?</p>
+                <button class="btn-explore" onclick="showAllTypes()">전체 16유형 보기</button>
+            </div>
+
+            <div class="share-modal" id="shareModal">
+                <div class="share-modal-content">
+                    <button class="share-close" onclick="closeShareModal()">×</button>
+                    <h3>결과 공유하기</h3>
+                    <div class="share-card" id="shareCard">
+                        <p class="share-label">나의 삶의 태도 유형</p>
+                        <p class="share-type" id="shareType">3-C</p>
+                        <p class="share-name" id="shareName">예술가/작가형</p>
+                        <p class="share-quote" id="shareQuote">"의미를 찾아 표현하는 사람"</p>
+                        <p class="share-url">hyungkwonko.info/mbti</p>
+                    </div>
+                    <div class="share-buttons">
+                        <button class="share-btn twitter" onclick="shareTwitter()">
+                            <span>X (Twitter)</span>
+                        </button>
+                        <button class="share-btn copy" onclick="copyLink()">
+                            <span>링크 복사</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <p>이 테스트에 대해 더 알고 싶으신가요?</p>
+            <a href="#" onclick="showAbout()" class="footer-link">테스트 소개 보기</a>
+            <div class="copyright">
+                <p>© 2025 Kwon Ko (고형권). All Rights Reserved.</p>
+                <p class="copyright-notice">본 저작물은 저작권법에 의해 보호됩니다. 무단 복제, 배포, 수정을 금지합니다.</p>
+            </div>
+        </footer>
+    </section>
+
+    <!-- About Modal -->
+    <div class="about-modal" id="aboutModal">
+        <div class="about-content">
+            <button class="about-close" onclick="closeAbout()">×</button>
+            <h2>삶의 태도 테스트에 대하여</h2>
+            <div class="about-text">
+                <p>이 테스트는 삶을 바라보는 태도를 4개의 축으로 분석합니다.</p>
+                
+                <h3>4가지 축</h3>
+                <ul>
+                    <li><strong>욕망</strong>: 삶을 긍정적으로 보고 <em>싶은가</em>, 부정적으로 보고 싶은가</li>
+                    <li><strong>실제</strong>: 삶을 실제로 긍정적으로 <em>경험하는가</em>, 부정적으로 경험하는가</li>
+                    <li><strong>행동</strong>: 세상에 적극적으로 개입하는가, 소극적으로 개입하는가</li>
+                    <li><strong>표현</strong>: 내면을 드러내는가, 숨기는가</li>
+                </ul>
+
+                <h3>16가지 유형</h3>
+                <p>4개 축의 조합으로 16가지 유형이 만들어지며, 각 유형은 철학 사조와 연결됩니다.</p>
+                
+                <h3>기본 4유형</h3>
+                <ul>
+                    <li><strong>1번 계열 (긍정욕망 + 실제긍정)</strong>: 니체의 운명애, 스토아학파</li>
+                    <li><strong>2번 계열 (부정욕망 + 실제긍정)</strong>: 냉소주의, 키니코스학파</li>
+                    <li><strong>3번 계열 (긍정욕망 + 실제부정)</strong>: 카뮈의 부조리주의</li>
+                    <li><strong>4번 계열 (부정욕망 + 실제부정)</strong>: 쇼펜하우어의 염세주의</li>
+                </ul>
+
+                <p class="about-note">이 테스트는 심리 진단 도구가 아닙니다. 자기 이해를 위한 하나의 렌즈로 활용해주세요.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- All Types Modal -->
+    <div class="types-modal" id="typesModal">
+        <div class="types-content">
+            <button class="types-close" onclick="closeAllTypes()">×</button>
+            <h2>16가지 실존 유형</h2>
+            <p class="types-subtitle">클릭하면 상세 정보를 볼 수 있습니다</p>
+            
+            <div class="types-matrix">
+                <!-- 상단 헤더 -->
+                <div class="matrix-header">
+                    <div class="matrix-corner"></div>
+                    <div class="matrix-col-label">긍정 욕망</div>
+                    <div class="matrix-col-label">부정 욕망</div>
+                </div>
+                
+                <!-- 첫번째 행: 실제 긍정 -->
+                <div class="matrix-row">
+                    <div class="matrix-row-label">실제 긍정</div>
+                    
+                    <!-- 1번 계열 -->
+                    <div class="type-group group-1">
+                        <div class="group-label">1번 계열</div>
+                        <div class="type-card" onclick="viewType('1-A')">
+                            <span class="type-code">1-A</span>
+                            <span class="type-name">전도사형</span>
+                        </div>
+                        <div class="type-card" onclick="viewType('1-B')">
+                            <span class="type-code">1-B</span>
+                            <span class="type-name">조용한 행동가형</span>
+                        </div>
+                        <div class="type-card" onclick="viewType('1-C')">
+                            <span class="type-code">1-C</span>
+                            <span class="type-name">현자형</span>
+                        </div>
+                        <div class="type-card" onclick="viewType('1-D')">
+                            <span class="type-code">1-D</span>
+                            <span class="type-name">은자형</span>
+                        </div>
+                    </div>
+                    
+                    <!-- 2번 계열 -->
+                    <div class="type-group group-2">
+                        <div class="group-label">2번 계열</div>
+                        <div class="type-card" onclick="viewType('2-A')">
+                            <span class="type-code">2-A</span>
+                            <span class="type-name">풍자가형</span>
+                        </div>
+                        <div class="type-card" onclick="viewType('2-B')">
+                            <span class="type-code">2-B</span>
+                            <span class="type-name">마키아벨리스트형</span>
+                        </div>
+                        <div class="type-card" onclick="viewType('2-C')">
+                            <span class="type-code">2-C</span>
+                            <span class="type-name">데카당스형</span>
+                        </div>
+                        <div class="type-card" onclick="viewType('2-D')">
+                            <span class="type-code">2-D</span>
+                            <span class="type-name">냉소적 순응형</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 두번째 행: 실제 부정 -->
+                <div class="matrix-row">
+                    <div class="matrix-row-label">실제 부정</div>
+                    
+                    <!-- 3번 계열 -->
+                    <div class="type-group group-3">
+                        <div class="group-label">3번 계열</div>
+                        <div class="type-card" onclick="viewType('3-A')">
+                            <span class="type-code">3-A</span>
+                            <span class="type-name">혁명가형</span>
+                        </div>
+                        <div class="type-card" onclick="viewType('3-B')">
+                            <span class="type-code">3-B</span>
+                            <span class="type-name">지하운동가형</span>
+                        </div>
+                        <div class="type-card" onclick="viewType('3-C')">
+                            <span class="type-code">3-C</span>
+                            <span class="type-name">예술가/작가형</span>
+                        </div>
+                        <div class="type-card" onclick="viewType('3-D')">
+                            <span class="type-code">3-D</span>
+                            <span class="type-name">고독한 구도자형</span>
+                        </div>
+                    </div>
+                    
+                    <!-- 4번 계열 -->
+                    <div class="type-group group-4">
+                        <div class="group-label">4번 계열</div>
+                        <div class="type-card" onclick="viewType('4-A')">
+                            <span class="type-code">4-A</span>
+                            <span class="type-name">철학적 염세형</span>
+                        </div>
+                        <div class="type-card" onclick="viewType('4-B')">
+                            <span class="type-code">4-B</span>
+                            <span class="type-name">그노시스형</span>
+                        </div>
+                        <div class="type-card" onclick="viewType('4-C')">
+                            <span class="type-code">4-C</span>
+                            <span class="type-name">비관적 예술가형</span>
+                        </div>
+                        <div class="type-card" onclick="viewType('4-D')">
+                            <span class="type-code">4-D</span>
+                            <span class="type-name">침묵의 체념형</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="types-legend">
+                <div class="legend-item">
+                    <span class="legend-label">A</span>
+                    <span>적극 + 드러냄</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-label">B</span>
+                    <span>적극 + 숨김</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-label">C</span>
+                    <span>소극 + 드러냄</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-label">D</span>
+                    <span>소극 + 숨김</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Type Detail Modal -->
+    <div class="type-detail-modal" id="typeDetailModal">
+        <div class="type-detail-content">
+            <button class="type-detail-close" onclick="closeTypeDetail()">×</button>
+            <button class="type-detail-back" onclick="backToAllTypes()">← 전체 유형</button>
+            <div id="typeDetailBody">
+                <!-- Filled by JS -->
+            </div>
+        </div>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
