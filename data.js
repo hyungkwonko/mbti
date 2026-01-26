@@ -26,8 +26,18 @@ const questions = [
     { id: 24, text: "할 말이 있어도 분위기 깨질까봐 참을 때가 많다", axis: "express", reverse: true }
 ];
 
+// Shuffle function (Fisher-Yates)
+function shuffleArray(array) {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+}
+
 // Shuffle questions for each test
-const shuffledQuestions = [...questions].sort(() => Math.random() - 0.5);
+const shuffledQuestions = shuffleArray(questions);
 
 // Type data - populated by types-group1.js ~ types-group4.js
 const typeData = {};
