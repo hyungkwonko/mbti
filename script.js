@@ -192,6 +192,9 @@ function displayResult(typeCode, scores) {
     document.getElementById('resultName').textContent = type.name;
     document.getElementById('resultPhilosophy').textContent = type.philosophy;
     
+    // Borderline check
+    displayBorderlineTypes(typeCode, scores);
+    
     // Spectrum
     displaySpectrum(scores);
     
@@ -329,6 +332,74 @@ function displayResult(typeCode, scores) {
     document.getElementById('shareType').textContent = type.code;
     document.getElementById('shareName').textContent = type.name;
     document.getElementById('shareQuote').textContent = `"${typeQuotes[type.code]}"`;
+}
+
+// Borderline detection
+function getBorderlineAxes(scores) {
+    const borderline = [];
+    if (scores.desire >= 22 && scores.desire <= 26) borderline.push('desire');
+    if (scores.reality >= 22 && scores.reality <= 26) borderline.push('reality');
+    if (scores.action >= 22 && scores.action <= 26) borderline.push('action');
+    if (scores.express >= 22 && scores.express <= 26) borderline.push('express');
+    return borderline;
+}
+
+function getAdjacentTypes(mainType, borderlineAxes) {
+    const [base, sub] = mainType.split('-');
+    const adjacent = [];
+    
+    // desire 경계 → 1↔3, 2↔4
+    if (borderlineAxes.includes('desire')) {
+        const altBase = { '1': '3', '3': '1', '2': '4', '4': '2' };
+        adjacent.push(`${altBase[base]}-${sub}`);
+    }
+    
+    // reality 경계 → 1↔2, 3↔4
+    if (borderlineAxes.includes('reality')) {
+        const altBase = { '1': '2', '2': '1', '3': '4', '4': '3' };
+        adjacent.push(`${altBase[base]}-${sub}`);
+    }
+    
+    // action 경계 → A↔C, B↔D
+    if (borderlineAxes.includes('action')) {
+        const altSub = { 'A': 'C', 'C': 'A', 'B': 'D', 'D': 'B' };
+        adjacent.push(`${base}-${altSub[sub]}`);
+    }
+    
+    // express 경계 → A↔B, C↔D
+    if (borderlineAxes.includes('express')) {
+        const altSub = { 'A': 'B', 'B': 'A', 'C': 'D', 'D': 'C' };
+        adjacent.push(`${base}-${altSub[sub]}`);
+    }
+    
+    return [...new Set(adjacent)];
+}
+
+function displayBorderlineTypes(typeCode, scores) {
+    const borderlineNote = document.getElementById('borderlineNote');
+    const borderline = getBorderlineAxes(scores);
+    
+    if (borderline.length === 0) {
+        borderlineNote.innerHTML = '';
+        return;
+    }
+    
+    const adjacent = getAdjacentTypes(typeCode, borderline);
+    const adjacentInfo = adjacent
+        .map(code => {
+            const t = typeData[code];
+            return t ? `<span class="adjacent-type" onclick="showTypeDetail('${code}')">${code} ${t.name}</span>` : null;
+        })
+        .filter(Boolean);
+    
+    if (adjacentInfo.length > 0) {
+        borderlineNote.innerHTML = `
+            <div class="borderline-box">
+                <span class="borderline-icon">💡</span>
+                <span class="borderline-text">${adjacentInfo.join(', ')} 성향도 함께 가지고 있어요</span>
+            </div>
+        `;
+    }
 }
 
 function displaySpectrum(scores) {
@@ -549,6 +620,10 @@ function viewType(typeCode) {
 
 function closeTypeDetail() {
     document.getElementById('typeDetailModal').classList.remove('active');
+}
+
+function showTypeDetail(typeCode) {
+    viewType(typeCode);
 }
 
 function backToAllTypes() {

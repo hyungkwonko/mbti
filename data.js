@@ -5,7 +5,7 @@ const questions = [
     { id: 3, text: "삶은 기본적으로 고통에 가깝다고 생각한다", axis: "desire", reverse: true },
     { id: 4, text: "열심히 사는 사람 보면 '저렇게까지 해야 하나' 싶을 때가 있다", axis: "desire", reverse: true },
     { id: 5, text: "삶에서 의미를 찾으려고 노력하는 편이다", axis: "desire", reverse: false },
-    { id: 6, text: "기대를 낮추고 사는 게 마음 편하다", axis: "desire", reverse: true },
+    { id: 6, text: "뭔가 내일은 좋은 일이 생길 거라는 기대가 있다", axis: "desire", reverse: false },
     { id: 7, text: "주말 저녁, 혼자 있을 때 공허함보다 평온함을 느낀다", axis: "reality", reverse: false },
     { id: 8, text: "뭔가 이뤘을 때 잠깐 기쁘다가 금방 '그래서 뭐?' 싶어진다", axis: "reality", reverse: true },
     { id: 9, text: "요즘 하루하루가 나쁘지 않게 흘러가고 있다", axis: "reality", reverse: false },

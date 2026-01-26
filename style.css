@@ -486,6 +486,37 @@ body {
     font-style: italic;
 }
 
+/* Borderline Types */
+.borderline-box {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 16px;
+    padding: 10px 16px;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 0.9rem;
+}
+
+.borderline-icon {
+    font-size: 1rem;
+}
+
+.borderline-text {
+    color: var(--text-secondary);
+}
+
+.adjacent-type {
+    color: var(--accent-primary);
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.adjacent-type:hover {
+    text-decoration: underline;
+}
+
 /* Spectrum */
 .result-spectrum {
     margin-bottom: 60px;
