@@ -40,7 +40,7 @@
 ### 문의
 
 저작물 사용 허가 및 라이선스 관련 문의:
-- 이메일: [저작권자 이메일]
+- 이메일: hyungkwonko@gmail.com
 - 웹사이트: hyungkwonko.info
 
 ---
