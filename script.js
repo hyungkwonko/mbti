@@ -333,7 +333,7 @@ function displayResult(typeCode, scores) {
 
 function displaySpectrum(scores) {
     // Desire
-    const desirePercent = (scores.desire / 42) * 100;
+    const desirePercent = ((scores.desire - 6) / 36) * 100;
     document.getElementById('desireValue').textContent = `${Math.round(desirePercent)}점`;
     document.getElementById('desireFill').style.width = `${desirePercent}%`;
     document.getElementById('desireMarker').style.left = `${desirePercent}%`;
@@ -342,7 +342,7 @@ function displaySpectrum(scores) {
         : '기대를 낮추고 현실적으로 보려 합니다.';
     
     // Reality
-    const realityPercent = (scores.reality / 42) * 100;
+    const realityPercent = ((scores.reality - 6) / 36) * 100;
     document.getElementById('realityValue').textContent = `${Math.round(realityPercent)}점`;
     document.getElementById('realityFill').style.width = `${realityPercent}%`;
     document.getElementById('realityMarker').style.left = `${realityPercent}%`;
@@ -351,7 +351,7 @@ function displaySpectrum(scores) {
         : '실제 경험은 기대에 못 미칩니다.';
     
     // Action
-    const actionPercent = (scores.action / 42) * 100;
+    const actionPercent = ((scores.action - 6) / 36) * 100;
     document.getElementById('actionValue').textContent = `${Math.round(actionPercent)}점`;
     document.getElementById('actionFill').style.width = `${actionPercent}%`;
     document.getElementById('actionMarker').style.left = `${actionPercent}%`;
@@ -360,7 +360,7 @@ function displaySpectrum(scores) {
         : '세상에 소극적으로 개입합니다.';
     
     // Express
-    const expressPercent = (scores.express / 42) * 100;
+    const expressPercent = ((scores.express - 6) / 36) * 100;
     document.getElementById('expressValue').textContent = `${Math.round(expressPercent)}점`;
     document.getElementById('expressFill').style.width = `${expressPercent}%`;
     document.getElementById('expressMarker').style.left = `${expressPercent}%`;
