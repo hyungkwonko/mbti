@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,10 +11,11 @@
     <meta property="og:url" content="https://hyungkwonko.info/mbti">
     <meta property="og:type" content="website">
     <meta name="author" content="Kwon Ko (고형권)">
-    <meta name="copyright" content="© 2025 Kwon Ko (고형권). All Rights Reserved.">
+    <meta name="copyright" content="© Kwon Ko (고형권). All Rights Reserved.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <!-- Intro Section -->
     <section id="intro" class="screen active">
@@ -47,7 +49,7 @@
                 <button class="btn-start" onclick="startTest()">
                     <span>시작하기</span>
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                        <path d="M5 12h14M12 5l7 7-7 7" />
                     </svg>
                 </button>
                 <button class="btn-types" onclick="showAllTypes()">
@@ -91,14 +93,14 @@
             <div class="test-nav">
                 <button class="btn-nav btn-prev" id="btnPrev" onclick="prevQuestion()" disabled>
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M19 12H5M12 19l-7-7 7-7"/>
+                        <path d="M19 12H5M12 19l-7-7 7-7" />
                     </svg>
                     <span>이전</span>
                 </button>
                 <button class="btn-nav btn-next" id="btnNext" onclick="nextQuestion()" disabled>
                     <span>다음</span>
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                        <path d="M5 12h14M12 5l7 7-7 7" />
                     </svg>
                 </button>
             </div>
@@ -244,18 +246,18 @@
             <div class="result-actions">
                 <button class="btn-share" onclick="shareResult()">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="18" cy="5" r="3"/>
-                        <circle cx="6" cy="12" r="3"/>
-                        <circle cx="18" cy="19" r="3"/>
-                        <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
-                        <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+                        <circle cx="18" cy="5" r="3" />
+                        <circle cx="6" cy="12" r="3" />
+                        <circle cx="18" cy="19" r="3" />
+                        <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
+                        <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
                     </svg>
                     <span>결과 공유하기</span>
                 </button>
                 <button class="btn-retry" onclick="retryTest()">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M1 4v6h6"/>
-                        <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/>
+                        <path d="M1 4v6h6" />
+                        <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10" />
                     </svg>
                     <span>다시 하기</span>
                 </button>
@@ -293,7 +295,7 @@
             <p>이 테스트에 대해 더 알고 싶으신가요?</p>
             <a href="#" onclick="showAbout()" class="footer-link">테스트 소개 보기</a>
             <div class="copyright">
-                <p>© 2025 Kwon Ko (고형권). All Rights Reserved.</p>
+                <p>© Kwon Ko (고형권). All Rights Reserved.</p>
                 <p class="copyright-notice">본 저작물은 저작권법에 의해 보호됩니다. 무단 복제, 배포, 수정을 금지합니다.</p>
             </div>
         </footer>
@@ -306,7 +308,7 @@
             <h2>삶의 태도 테스트에 대하여</h2>
             <div class="about-text">
                 <p>이 테스트는 삶을 바라보는 태도를 4개의 축으로 분석합니다.</p>
-                
+
                 <h3>4가지 축</h3>
                 <ul>
                     <li><strong>욕망</strong>: 삶을 긍정적으로 보고 <em>싶은가</em>, 부정적으로 보고 싶은가</li>
@@ -317,7 +319,7 @@
 
                 <h3>16가지 유형</h3>
                 <p>4개 축의 조합으로 16가지 유형이 만들어지며, 각 유형은 철학 사조와 연결됩니다.</p>
-                
+
                 <h3>기본 4유형</h3>
                 <ul>
                     <li><strong>1번 계열 (긍정욕망 + 실제긍정)</strong>: 니체의 운명애, 스토아학파</li>
@@ -337,7 +339,7 @@
             <button class="types-close" onclick="closeAllTypes()">×</button>
             <h2>16가지 실존 유형</h2>
             <p class="types-subtitle">클릭하면 상세 정보를 볼 수 있습니다</p>
-            
+
             <div class="types-matrix">
                 <!-- 상단 헤더 -->
                 <div class="matrix-header">
@@ -345,11 +347,11 @@
                     <div class="matrix-col-label">긍정 욕망</div>
                     <div class="matrix-col-label">부정 욕망</div>
                 </div>
-                
+
                 <!-- 첫번째 행: 실제 긍정 -->
                 <div class="matrix-row">
                     <div class="matrix-row-label">실제 긍정</div>
-                    
+
                     <!-- 1번 계열 -->
                     <div class="type-group group-1">
                         <div class="group-label">1번 계열</div>
@@ -370,7 +372,7 @@
                             <span class="type-name">은자형</span>
                         </div>
                     </div>
-                    
+
                     <!-- 2번 계열 -->
                     <div class="type-group group-2">
                         <div class="group-label">2번 계열</div>
@@ -392,11 +394,11 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- 두번째 행: 실제 부정 -->
                 <div class="matrix-row">
                     <div class="matrix-row-label">실제 부정</div>
-                    
+
                     <!-- 3번 계열 -->
                     <div class="type-group group-3">
                         <div class="group-label">3번 계열</div>
@@ -417,7 +419,7 @@
                             <span class="type-name">고독한 구도자형</span>
                         </div>
                     </div>
-                    
+
                     <!-- 4번 계열 -->
                     <div class="type-group group-4">
                         <div class="group-label">4번 계열</div>
@@ -440,7 +442,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="types-legend">
                 <div class="legend-item">
                     <span class="legend-label">A</span>
@@ -479,4 +481,5 @@
     <script src="types-group4.js"></script>
     <script src="script.js"></script>
 </body>
+
 </html>

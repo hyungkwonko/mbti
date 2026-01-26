@@ -1,6 +1,6 @@
 # 저작권 고지 (Copyright Notice)
 
-© 2025 Kwon Ko (고형권). All Rights Reserved.
+© 2026 Kwon Ko (고형권). All Rights Reserved.
 
 ---
 
@@ -11,7 +11,7 @@
 본 저작물 "삶의 태도 테스트 (16가지 실존 유형)"는 대한민국 저작권법 및 국제 저작권 협약에 의해 보호됩니다.
 
 **저작권자**: Kwon Ko (고형권)  
-**창작일**: 2025년  
+**창작일**: 2026년  
 **저작물**: 삶의 태도 테스트 웹사이트, 16유형 프레임워크, 질문 문항, 유형 설명 및 모든 관련 콘텐츠
 
 ### 금지 사항
@@ -52,7 +52,7 @@
 This work, "Life Attitude Test (16 Existential Types)," is protected under the Copyright Act of the Republic of Korea and international copyright conventions.
 
 **Copyright Holder**: Kwon Ko (고형권)  
-**Year of Creation**: 2025  
+**Year of Creation**: 2026  
 **Work**: Life Attitude Test website, 16-type framework, questionnaire items, type descriptions, and all related content
 
 ### Prohibited Actions
@@ -91,4 +91,4 @@ For licensing inquiries and permission requests:
 본 라이선스는 저작권자의 권리를 보호하기 위한 것이며, 대한민국 법률에 따라 해석됩니다.  
 This license is intended to protect the rights of the copyright holder and shall be interpreted in accordance with the laws of the Republic of Korea.
 
-**최종 수정일**: 2025년 1월
+**최종 수정일**: 2026년 1월
