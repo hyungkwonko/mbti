@@ -22,7 +22,7 @@ const questions = [
     { id: 14, text: "뉴스에 나오는 '나쁜 사람'도 그럴 만한 사정이 있었을 거라고 본다", axis: "perception", reverse: true },
     { id: 15, text: "의사나 전문가가 말하면 일단 믿고 따르는 편이다", axis: "perception", reverse: false },
     { id: 16, text: "'상식'이라고 불리는 것들도 의심해볼 필요가 있다", axis: "perception", reverse: true },
-    { id: 17, text: "지각은 이유가 뭐든 지각이라고 생각한다", axis: "perception", reverse: false },
+    { id: 17, text: "영화나 소설이 열린 결말이면 별로다", axis: "perception", reverse: false },
     { id: 18, text: "하나의 정답보다 다양한 관점이 공존하는 것이 바람직하다", axis: "perception", reverse: true },
     
     // 지향 축 (19-24) - 어떻게 행동/선택하는가 (이상 vs 현실)
