@@ -140,8 +140,8 @@ function calculateResult() {
     const scores = {
         desire: 0,
         reality: 0,
-        action: 0,
-        express: 0
+        perception: 0,
+        orientation: 0
     };
     
     // Calculate scores for each axis
@@ -154,21 +154,22 @@ function calculateResult() {
     // Determine type code
     const desirePositive = scores.desire > 24;
     const realityPositive = scores.reality > 24;
-    const actionActive = scores.action > 24;
-    const expressOpen = scores.express > 24;
+    const perceptionModern = scores.perception > 24;
+    const orientationIdeal = scores.orientation > 24;
     
-    // Base type (1-4)
+    // Base type (1-4): desire × reality
     let baseType;
     if (desirePositive && realityPositive) baseType = '1';
     else if (!desirePositive && realityPositive) baseType = '2';
     else if (desirePositive && !realityPositive) baseType = '3';
     else baseType = '4';
     
-    // Subtype (A-D)
+    // Subtype (A-D): perception × orientation
+    // A: 모던 + 이상, B: 모던 + 현실, C: 포스트모던 + 이상, D: 포스트모던 + 현실
     let subType;
-    if (actionActive && expressOpen) subType = 'A';
-    else if (actionActive && !expressOpen) subType = 'B';
-    else if (!actionActive && expressOpen) subType = 'C';
+    if (perceptionModern && orientationIdeal) subType = 'A';
+    else if (perceptionModern && !orientationIdeal) subType = 'B';
+    else if (!perceptionModern && orientationIdeal) subType = 'C';
     else subType = 'D';
     
     const typeCode = `${baseType}-${subType}`;
@@ -339,8 +340,8 @@ function getBorderlineAxes(scores) {
     const borderline = [];
     if (scores.desire >= 22 && scores.desire <= 26) borderline.push('desire');
     if (scores.reality >= 22 && scores.reality <= 26) borderline.push('reality');
-    if (scores.action >= 22 && scores.action <= 26) borderline.push('action');
-    if (scores.express >= 22 && scores.express <= 26) borderline.push('express');
+    if (scores.perception >= 22 && scores.perception <= 26) borderline.push('perception');
+    if (scores.orientation >= 22 && scores.orientation <= 26) borderline.push('orientation');
     return borderline;
 }
 
@@ -360,14 +361,14 @@ function getAdjacentTypes(mainType, borderlineAxes) {
         adjacent.push(`${altBase[base]}-${sub}`);
     }
     
-    // action 경계 → A↔C, B↔D
-    if (borderlineAxes.includes('action')) {
+    // perception 경계 (모던↔포스트모던) → A↔C, B↔D
+    if (borderlineAxes.includes('perception')) {
         const altSub = { 'A': 'C', 'C': 'A', 'B': 'D', 'D': 'B' };
         adjacent.push(`${base}-${altSub[sub]}`);
     }
     
-    // express 경계 → A↔B, C↔D
-    if (borderlineAxes.includes('express')) {
+    // orientation 경계 (이상↔현실) → A↔B, C↔D
+    if (borderlineAxes.includes('orientation')) {
         const altSub = { 'A': 'B', 'B': 'A', 'C': 'D', 'D': 'C' };
         adjacent.push(`${base}-${altSub[sub]}`);
     }
@@ -403,41 +404,41 @@ function displayBorderlineTypes(typeCode, scores) {
 }
 
 function displaySpectrum(scores) {
-    // Desire
+    // Desire (욕망)
     const desirePercent = ((scores.desire - 6) / 36) * 100;
     document.getElementById('desireValue').textContent = `${Math.round(desirePercent)}점`;
     document.getElementById('desireFill').style.width = `${desirePercent}%`;
     document.getElementById('desireMarker').style.left = `${desirePercent}%`;
     document.getElementById('desireDesc').textContent = scores.desire > 24 
-        ? '삶에서 의미를 찾고 싶어하는 욕구가 강합니다.'
-        : '기대를 낮추고 현실적으로 보려 합니다.';
+        ? '삶을 긍정하고 의미를 찾으려 합니다.'
+        : '삶에 대한 기대를 낮추는 편입니다.';
     
-    // Reality
+    // Reality (실제)
     const realityPercent = ((scores.reality - 6) / 36) * 100;
     document.getElementById('realityValue').textContent = `${Math.round(realityPercent)}점`;
     document.getElementById('realityFill').style.width = `${realityPercent}%`;
     document.getElementById('realityMarker').style.left = `${realityPercent}%`;
     document.getElementById('realityDesc').textContent = scores.reality > 24 
-        ? '대체로 삶을 긍정적으로 경험합니다.'
-        : '실제 경험은 기대에 못 미칩니다.';
+        ? '실제로 삶을 긍정적으로 경험합니다.'
+        : '실제 경험은 힘든 편입니다.';
     
-    // Action
-    const actionPercent = ((scores.action - 6) / 36) * 100;
-    document.getElementById('actionValue').textContent = `${Math.round(actionPercent)}점`;
-    document.getElementById('actionFill').style.width = `${actionPercent}%`;
-    document.getElementById('actionMarker').style.left = `${actionPercent}%`;
-    document.getElementById('actionDesc').textContent = scores.action > 24 
-        ? '세상에 적극적으로 개입합니다.'
-        : '세상에 소극적으로 개입합니다.';
+    // Perception (인식)
+    const perceptionPercent = ((scores.perception - 6) / 36) * 100;
+    document.getElementById('perceptionValue').textContent = `${Math.round(perceptionPercent)}점`;
+    document.getElementById('perceptionFill').style.width = `${perceptionPercent}%`;
+    document.getElementById('perceptionMarker').style.left = `${perceptionPercent}%`;
+    document.getElementById('perceptionDesc').textContent = scores.perception > 24 
+        ? '명확한 진리와 기준이 있다고 봅니다.'
+        : '모든 것은 관점에 따라 다르다고 봅니다.';
     
-    // Express
-    const expressPercent = ((scores.express - 6) / 36) * 100;
-    document.getElementById('expressValue').textContent = `${Math.round(expressPercent)}점`;
-    document.getElementById('expressFill').style.width = `${expressPercent}%`;
-    document.getElementById('expressMarker').style.left = `${expressPercent}%`;
-    document.getElementById('expressDesc').textContent = scores.express > 24 
-        ? '내면을 드러내는 편입니다.'
-        : '내면을 숨기는 편입니다.';
+    // Orientation (지향)
+    const orientationPercent = ((scores.orientation - 6) / 36) * 100;
+    document.getElementById('orientationValue').textContent = `${Math.round(orientationPercent)}점`;
+    document.getElementById('orientationFill').style.width = `${orientationPercent}%`;
+    document.getElementById('orientationMarker').style.left = `${orientationPercent}%`;
+    document.getElementById('orientationDesc').textContent = scores.orientation > 24 
+        ? '이상과 원칙을 추구합니다.'
+        : '현실적이고 실용적인 선택을 합니다.';
 }
 
 // Share functions

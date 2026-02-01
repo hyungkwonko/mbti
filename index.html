@@ -4,10 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>삶의 태도 테스트 | 16가지 실존 유형</title>
-    <meta name="description" content="당신은 삶을 어떻게 바라보나요? 니체, 카뮈, 쇼펜하우어... 16가지 실존 유형 중 당신의 유형을 찾아보세요.">
-    <meta property="og:title" content="삶의 태도 테스트 | 16가지 실존 유형">
-    <meta property="og:description" content="당신은 삶을 어떻게 바라보나요? 16가지 실존 유형 중 당신의 유형을 찾아보세요.">
+    <title>삶의 태도 테스트 | 16가지 유형</title>
+    <meta name="description" content="당신은 삶을 어떻게 바라보나요? 16가지 유형 중 당신의 유형을 찾아보세요.">
+    <meta property="og:title" content="삶의 태도 테스트 | 16가지 유형">
+    <meta property="og:description" content="당신은 삶을 어떻게 바라보나요? 16가지 유형 중 당신의 유형을 찾아보세요.">
     <meta property="og:url" content="https://hyungkwonko.info/mbti">
     <meta property="og:type" content="website">
     <meta name="author" content="Kwon Ko (고형권)">
@@ -26,7 +26,7 @@
                 <h1 class="intro-title">나는 삶을<br>어떻게 살고 있을까</h1>
                 <p class="intro-desc">
                     4가지 축 × 16가지 유형<br>
-                    나의 실존적 태도를 알아보는 테스트
+                    나의 삶의 태도를 알아보는 테스트
                 </p>
                 <div class="intro-axes">
                     <div class="axis-item">
@@ -38,12 +38,12 @@
                         <span class="axis-desc">실제로 어떻게 경험하는가</span>
                     </div>
                     <div class="axis-item">
-                        <span class="axis-label">행동</span>
-                        <span class="axis-desc">세상에 어떻게 개입하는가</span>
+                        <span class="axis-label">인식</span>
+                        <span class="axis-desc">세계를 어떻게 이해하는가</span>
                     </div>
                     <div class="axis-item">
-                        <span class="axis-label">표현</span>
-                        <span class="axis-desc">내면을 어떻게 다루는가</span>
+                        <span class="axis-label">지향</span>
+                        <span class="axis-desc">어떻게 행동하고 선택하는가</span>
                     </div>
                 </div>
                 <button class="btn-start" onclick="startTest()">
@@ -112,9 +112,9 @@
         <div class="container">
             <div class="result-header">
                 <p class="result-label">당신의 유형</p>
-                <h1 class="result-type" id="resultType">3-C</h1>
-                <h2 class="result-name" id="resultName">예술가/작가형</h2>
-                <p class="result-philosophy" id="resultPhilosophy">부조리 문학 (카뮈, 카프카)</p>
+                <h1 class="result-type" id="resultType">1-A</h1>
+                <h2 class="result-name" id="resultName">열정적 이상주의자</h2>
+                <p class="result-philosophy" id="resultPhilosophy">니체 + 칸트 + 플라톤</p>
                 <div id="borderlineNote"></div>
             </div>
 
@@ -134,7 +134,7 @@
                             </div>
                             <span class="spectrum-label-right">긍정</span>
                         </div>
-                        <p class="spectrum-desc" id="desireDesc">삶에서 의미를 찾고 싶어하는 욕구가 강합니다.</p>
+                        <p class="spectrum-desc" id="desireDesc">삶을 긍정하고 의미를 찾으려 합니다.</p>
                     </div>
                     <div class="spectrum-item">
                         <div class="spectrum-header">
@@ -149,37 +149,37 @@
                             </div>
                             <span class="spectrum-label-right">긍정</span>
                         </div>
-                        <p class="spectrum-desc" id="realityDesc">실제 경험은 기대에 못 미칩니다.</p>
+                        <p class="spectrum-desc" id="realityDesc">실제로 삶을 긍정적으로 경험합니다.</p>
                     </div>
                     <div class="spectrum-item">
                         <div class="spectrum-header">
-                            <span class="spectrum-name">행동</span>
-                            <span class="spectrum-value" id="actionValue">20/42</span>
+                            <span class="spectrum-name">인식</span>
+                            <span class="spectrum-value" id="perceptionValue">20/42</span>
                         </div>
                         <div class="spectrum-bar-container">
-                            <span class="spectrum-label-left">소극</span>
+                            <span class="spectrum-label-left">다양한 관점</span>
                             <div class="spectrum-bar">
-                                <div class="spectrum-fill" id="actionFill"></div>
-                                <div class="spectrum-marker" id="actionMarker"></div>
+                                <div class="spectrum-fill" id="perceptionFill"></div>
+                                <div class="spectrum-marker" id="perceptionMarker"></div>
                             </div>
-                            <span class="spectrum-label-right">적극</span>
+                            <span class="spectrum-label-right">명확한 기준</span>
                         </div>
-                        <p class="spectrum-desc" id="actionDesc">세상에 소극적으로 개입합니다.</p>
+                        <p class="spectrum-desc" id="perceptionDesc">명확한 진리와 기준이 있다고 봅니다.</p>
                     </div>
                     <div class="spectrum-item">
                         <div class="spectrum-header">
-                            <span class="spectrum-name">표현</span>
-                            <span class="spectrum-value" id="expressValue">35/42</span>
+                            <span class="spectrum-name">지향</span>
+                            <span class="spectrum-value" id="orientationValue">35/42</span>
                         </div>
                         <div class="spectrum-bar-container">
-                            <span class="spectrum-label-left">숨김</span>
+                            <span class="spectrum-label-left">현실</span>
                             <div class="spectrum-bar">
-                                <div class="spectrum-fill" id="expressFill"></div>
-                                <div class="spectrum-marker" id="expressMarker"></div>
+                                <div class="spectrum-fill" id="orientationFill"></div>
+                                <div class="spectrum-marker" id="orientationMarker"></div>
                             </div>
-                            <span class="spectrum-label-right">드러냄</span>
+                            <span class="spectrum-label-right">이상</span>
                         </div>
-                        <p class="spectrum-desc" id="expressDesc">내면을 드러내는 편입니다.</p>
+                        <p class="spectrum-desc" id="orientationDesc">이상과 원칙을 추구합니다.</p>
                     </div>
                 </div>
             </div>
@@ -275,9 +275,9 @@
                     <h3>결과 공유하기</h3>
                     <div class="share-card" id="shareCard">
                         <p class="share-label">나의 삶의 태도 유형</p>
-                        <p class="share-type" id="shareType">3-C</p>
-                        <p class="share-name" id="shareName">예술가/작가형</p>
-                        <p class="share-quote" id="shareQuote">"의미를 찾아 표현하는 사람"</p>
+                        <p class="share-type" id="shareType">1-A</p>
+                        <p class="share-name" id="shareName">열정적 이상주의자</p>
+                        <p class="share-quote" id="shareQuote">"빛을 믿고 빛을 향해 달리는 사람"</p>
                         <p class="share-url">hyungkwonko.info/mbti</p>
                     </div>
                     <div class="share-buttons">
@@ -312,21 +312,26 @@
 
                 <h3>4가지 축</h3>
                 <ul>
-                    <li><strong>욕망</strong>: 삶을 긍정적으로 보고 <em>싶은가</em>, 부정적으로 보고 싶은가</li>
-                    <li><strong>실제</strong>: 삶을 실제로 긍정적으로 <em>경험하는가</em>, 부정적으로 경험하는가</li>
-                    <li><strong>행동</strong>: 세상에 적극적으로 개입하는가, 소극적으로 개입하는가</li>
-                    <li><strong>표현</strong>: 내면을 드러내는가, 숨기는가</li>
+                    <li><strong>욕망</strong>: 삶을 긍정적으로 보고 <em>싶은가</em> vs 그렇지 않은가</li>
+                    <li><strong>실제</strong>: 삶을 실제로 긍정적으로 <em>경험하는가</em> vs 그렇지 않은가</li>
+                    <li><strong>인식</strong>: 명확한 기준이 있다고 보는가 vs 상황마다 다르다고 보는가</li>
+                    <li><strong>지향</strong>: 이상을 추구하는가 vs 현실적으로 선택하는가</li>
                 </ul>
 
-                <h3>16가지 유형</h3>
-                <p>4개 축의 조합으로 16가지 유형이 만들어지며, 각 유형은 철학 사조와 연결됩니다.</p>
-
-                <h3>기본 4유형</h3>
+                <h3>기본 4계열</h3>
                 <ul>
-                    <li><strong>1번 계열 (긍정욕망 + 실제긍정)</strong>: 니체의 운명애, 스토아학파</li>
-                    <li><strong>2번 계열 (부정욕망 + 실제긍정)</strong>: 냉소주의, 키니코스학파</li>
-                    <li><strong>3번 계열 (긍정욕망 + 실제부정)</strong>: 카뮈의 부조리주의</li>
-                    <li><strong>4번 계열 (부정욕망 + 실제부정)</strong>: 쇼펜하우어의 염세주의</li>
+                    <li><strong>1번 계열</strong>: 삶이 좋다고 생각하고, 실제로도 좋게 경험하는 사람들. 에너지 넘치고 적극적.</li>
+                    <li><strong>2번 계열</strong>: 크게 기대하진 않지만, 그래도 나름 괜찮게 살아가는 사람들. 담담하고 현실적.</li>
+                    <li><strong>3번 계열</strong>: 좋은 삶을 원하지만, 현실은 힘든 사람들. 이상과 현실 사이에서 분투 중.</li>
+                    <li><strong>4번 계열</strong>: 기대도 낮고, 실제로도 힘든 사람들. 세상의 어두운 면을 직시하는 편.</li>
+                </ul>
+
+                <h3>A, B, C, D의 의미</h3>
+                <ul>
+                    <li><strong>A</strong>: "정답이 있다" + "이상 추구" → 확고한 신념으로 목표를 향해 가는 타입</li>
+                    <li><strong>B</strong>: "정답이 있다" + "현실 중심" → 원칙은 있되 실용적으로 움직이는 타입</li>
+                    <li><strong>C</strong>: "상황마다 다르다" + "이상 추구" → 열린 마음으로 더 나은 것을 꿈꾸는 타입</li>
+                    <li><strong>D</strong>: "상황마다 다르다" + "현실 중심" → 유연하게 흘러가며 사는 타입</li>
                 </ul>
 
                 <p class="about-note">이 테스트는 심리 진단 도구가 아닙니다. 자기 이해를 위한 하나의 렌즈로 활용해주세요.</p>
@@ -338,7 +343,7 @@
     <div class="types-modal" id="typesModal">
         <div class="types-content">
             <button class="types-close" onclick="closeAllTypes()">×</button>
-            <h2>16가지 실존 유형</h2>
+            <h2>16가지 유형</h2>
             <p class="types-subtitle">클릭하면 상세 정보를 볼 수 있습니다</p>
 
             <div class="types-matrix">
@@ -358,19 +363,19 @@
                         <div class="group-label">1번 계열</div>
                         <div class="type-card" onclick="viewType('1-A')">
                             <span class="type-code">1-A</span>
-                            <span class="type-name">전도사형</span>
+                            <span class="type-name">열정적 이상주의자</span>
                         </div>
                         <div class="type-card" onclick="viewType('1-B')">
                             <span class="type-code">1-B</span>
-                            <span class="type-name">조용한 행동가형</span>
+                            <span class="type-name">합리적 낙관주의자</span>
                         </div>
                         <div class="type-card" onclick="viewType('1-C')">
                             <span class="type-code">1-C</span>
-                            <span class="type-name">현자형</span>
+                            <span class="type-name">유연한 이상주의자</span>
                         </div>
                         <div class="type-card" onclick="viewType('1-D')">
                             <span class="type-code">1-D</span>
-                            <span class="type-name">은자형</span>
+                            <span class="type-name">유동적 향유자</span>
                         </div>
                     </div>
 
@@ -379,19 +384,19 @@
                         <div class="group-label">2번 계열</div>
                         <div class="type-card" onclick="viewType('2-A')">
                             <span class="type-code">2-A</span>
-                            <span class="type-name">풍자가형</span>
+                            <span class="type-name">냉철한 원칙주의자</span>
                         </div>
                         <div class="type-card" onclick="viewType('2-B')">
                             <span class="type-code">2-B</span>
-                            <span class="type-name">마키아벨리스트형</span>
+                            <span class="type-name">담담한 현실주의자</span>
                         </div>
                         <div class="type-card" onclick="viewType('2-C')">
                             <span class="type-code">2-C</span>
-                            <span class="type-name">데카당스형</span>
+                            <span class="type-name">우아한 냉소가</span>
                         </div>
                         <div class="type-card" onclick="viewType('2-D')">
                             <span class="type-code">2-D</span>
-                            <span class="type-name">냉소적 순응형</span>
+                            <span class="type-name">가볍게 사는 사람</span>
                         </div>
                     </div>
                 </div>
@@ -405,19 +410,19 @@
                         <div class="group-label">3번 계열</div>
                         <div class="type-card" onclick="viewType('3-A')">
                             <span class="type-code">3-A</span>
-                            <span class="type-name">혁명가형</span>
+                            <span class="type-name">상처받은 이상주의자</span>
                         </div>
                         <div class="type-card" onclick="viewType('3-B')">
                             <span class="type-code">3-B</span>
-                            <span class="type-name">지하운동가형</span>
+                            <span class="type-name">지친 현실주의자</span>
                         </div>
                         <div class="type-card" onclick="viewType('3-C')">
                             <span class="type-code">3-C</span>
-                            <span class="type-name">예술가/작가형</span>
+                            <span class="type-name">아픈 낭만주의자</span>
                         </div>
                         <div class="type-card" onclick="viewType('3-D')">
                             <span class="type-code">3-D</span>
-                            <span class="type-name">고독한 구도자형</span>
+                            <span class="type-name">살아남은 사람</span>
                         </div>
                     </div>
 
@@ -426,19 +431,19 @@
                         <div class="group-label">4번 계열</div>
                         <div class="type-card" onclick="viewType('4-A')">
                             <span class="type-code">4-A</span>
-                            <span class="type-name">철학적 염세형</span>
+                            <span class="type-name">비관적 진리탐구자</span>
                         </div>
                         <div class="type-card" onclick="viewType('4-B')">
                             <span class="type-code">4-B</span>
-                            <span class="type-name">그노시스형</span>
+                            <span class="type-name">체계적 비관주의자</span>
                         </div>
                         <div class="type-card" onclick="viewType('4-C')">
                             <span class="type-code">4-C</span>
-                            <span class="type-name">비관적 예술가형</span>
+                            <span class="type-name">아름다움만 남은 사람</span>
                         </div>
                         <div class="type-card" onclick="viewType('4-D')">
                             <span class="type-code">4-D</span>
-                            <span class="type-name">침묵의 체념형</span>
+                            <span class="type-name">무감각한 방관자</span>
                         </div>
                     </div>
                 </div>
@@ -447,19 +452,19 @@
             <div class="types-legend">
                 <div class="legend-item">
                     <span class="legend-label">A</span>
-                    <span>적극 + 드러냄</span>
+                    <span>정답이 있다 + 이상 추구</span>
                 </div>
                 <div class="legend-item">
                     <span class="legend-label">B</span>
-                    <span>적극 + 숨김</span>
+                    <span>정답이 있다 + 현실 중심</span>
                 </div>
                 <div class="legend-item">
                     <span class="legend-label">C</span>
-                    <span>소극 + 드러냄</span>
+                    <span>상황마다 다르다 + 이상 추구</span>
                 </div>
                 <div class="legend-item">
                     <span class="legend-label">D</span>
-                    <span>소극 + 숨김</span>
+                    <span>상황마다 다르다 + 현실 중심</span>
                 </div>
             </div>
         </div>
