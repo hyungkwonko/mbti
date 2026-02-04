@@ -1,491 +1,208 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>삶의 태도 테스트 | 16가지 유형</title>
-    <meta name="description" content="당신은 삶을 어떻게 바라보나요? 16가지 유형 중 당신의 유형을 찾아보세요.">
-    <meta property="og:title" content="삶의 태도 테스트 | 16가지 유형">
-    <meta property="og:description" content="당신은 삶을 어떻게 바라보나요? 16가지 유형 중 당신의 유형을 찾아보세요.">
+    <title>마음 좌표 테스트 | Mind Coordinates Test</title>
+    <meta name="description" content="4가지 축으로 알아보는 16가지 삶의 태도 유형 | 16 life attitude types based on 4 axes">
+    <meta property="og:title" content="마음 좌표 테스트 | Mind Coordinates Test">
+    <meta property="og:description" content="당신의 마음 좌표는 어디인가요? | Where are your mind coordinates?">
     <meta property="og:url" content="https://hyungkwonko.info/mbti">
     <meta property="og:type" content="website">
     <meta name="author" content="Kwon Ko (고형권)">
     <meta name="copyright" content="© Kwon Ko (고형권). All Rights Reserved.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+    <style>
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #111111;
+            --bg-tertiary: #1a1a1a;
+            --text-primary: #ffffff;
+            --text-secondary: #999999;
+            --text-muted: #555555;
+            --border-color: #222222;
+            --accent-primary: #ffffff;
+            --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --font-main: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+        }
+
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+
+        .container {
+            text-align: center;
+            max-width: 500px;
+        }
+
+        .badge {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            background: var(--bg-tertiary);
+            padding: 8px 16px;
+            border-radius: 20px;
+            margin-bottom: 32px;
+            border: 1px solid var(--border-color);
+        }
+
+        h1 {
+            font-size: clamp(1.8rem, 6vw, 2.5rem);
+            font-weight: 600;
+            letter-spacing: -0.03em;
+            line-height: 1.3;
+            margin-bottom: 16px;
+        }
+
+        .subtitle {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin-bottom: 48px;
+            line-height: 1.6;
+        }
+
+        .language-options {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .lang-btn {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 24px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-family: var(--font-main);
+            font-size: 1rem;
+            text-decoration: none;
+            transition: var(--transition-smooth);
+        }
+
+        .lang-btn:hover {
+            border-color: var(--text-muted);
+            background: var(--bg-tertiary);
+        }
+
+        .lang-btn.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        .lang-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .lang-flag {
+            font-size: 1.5rem;
+        }
+
+        .lang-text {
+            text-align: left;
+        }
+
+        .lang-name {
+            font-weight: 500;
+            display: block;
+        }
+
+        .lang-native {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .lang-status {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            padding: 4px 10px;
+            background: var(--bg-tertiary);
+            border-radius: 12px;
+        }
+
+        .lang-status.available {
+            color: #10b981;
+            background: rgba(16, 185, 129, 0.1);
+        }
+
+        .footer {
+            margin-top: 60px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .footer a {
+            color: var(--text-secondary);
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            color: var(--text-primary);
+        }
+    </style>
 </head>
 
 <body>
-    <!-- Intro Section -->
-    <section id="intro" class="screen active">
-        <div class="intro-bg"></div>
-        <div class="container">
-            <div class="intro-content">
-                <div class="intro-badge">심리 테스트</div>
-                <h1 class="intro-title">나는 삶을<br>어떻게 살고 있을까</h1>
-                <p class="intro-desc">
-                    4가지 축 × 16가지 유형<br>
-                    나의 삶의 태도를 알아보는 테스트
-                </p>
-                <div class="intro-axes">
-                    <div class="axis-item">
-                        <span class="axis-label">욕망</span>
-                        <span class="axis-desc">삶을 어떻게 보고 싶은가</span>
-                    </div>
-                    <div class="axis-item">
-                        <span class="axis-label">실제</span>
-                        <span class="axis-desc">실제로 어떻게 경험하는가</span>
-                    </div>
-                    <div class="axis-item">
-                        <span class="axis-label">인식</span>
-                        <span class="axis-desc">세계를 어떻게 이해하는가</span>
-                    </div>
-                    <div class="axis-item">
-                        <span class="axis-label">지향</span>
-                        <span class="axis-desc">어떻게 행동하고 선택하는가</span>
+    <div class="container">
+        <div class="badge">Personality Test</div>
+        <h1>마음 좌표 테스트</h1>
+        <p class="subtitle">
+            Select your language<br>
+            언어를 선택하세요
+        </p>
+
+        <div class="language-options">
+            <a href="./ko/" class="lang-btn">
+                <div class="lang-info">
+                    <span class="lang-flag">🇰🇷</span>
+                    <div class="lang-text">
+                        <span class="lang-name">한국어</span>
+                        <span class="lang-native">Korean</span>
                     </div>
                 </div>
-                <button class="btn-start" onclick="startTest()">
-                    <span>시작하기</span>
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M5 12h14M12 5l7 7-7 7" />
-                    </svg>
-                </button>
-                <button class="btn-types" onclick="showAllTypes()">
-                    <span>16유형 미리보기</span>
-                </button>
-                <p class="intro-time">24문항 · 5분</p>
-            </div>
-        </div>
-    </section>
+                <span class="lang-status available">Available</span>
+            </a>
 
-    <!-- Test Section -->
-    <section id="test" class="screen">
-        <div class="container">
-            <div class="test-header">
-                <div class="progress-container">
-                    <div class="progress-bar">
-                        <div class="progress-fill" id="progressFill"></div>
-                    </div>
-                    <span class="progress-text" id="progressText">1 / 24</span>
-                </div>
-            </div>
-            <div class="question-container" id="questionContainer">
-                <p class="question-number" id="questionNumber">Q1</p>
-                <h2 class="question-text" id="questionText"></h2>
-                <div class="answer-scale">
-                    <div class="scale-labels">
-                        <span>전혀 아니다</span>
-                        <span>매우 그렇다</span>
-                    </div>
-                    <div class="scale-buttons" id="scaleButtons">
-                        <button class="scale-btn" data-value="1">1</button>
-                        <button class="scale-btn" data-value="2">2</button>
-                        <button class="scale-btn" data-value="3">3</button>
-                        <button class="scale-btn" data-value="4">4</button>
-                        <button class="scale-btn" data-value="5">5</button>
-                        <button class="scale-btn" data-value="6">6</button>
-                        <button class="scale-btn" data-value="7">7</button>
+            <div class="lang-btn disabled">
+                <div class="lang-info">
+                    <span class="lang-flag">🇺🇸</span>
+                    <div class="lang-text">
+                        <span class="lang-name">English</span>
+                        <span class="lang-native">영어</span>
                     </div>
                 </div>
-            </div>
-            <div class="test-nav">
-                <button class="btn-nav btn-prev" id="btnPrev" onclick="prevQuestion()" disabled>
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M19 12H5M12 19l-7-7 7-7" />
-                    </svg>
-                    <span>이전</span>
-                </button>
-                <button class="btn-nav btn-next" id="btnNext" onclick="nextQuestion()" disabled>
-                    <span>다음</span>
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M5 12h14M12 5l7 7-7 7" />
-                    </svg>
-                </button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Result Section -->
-    <section id="result" class="screen">
-        <div class="container">
-            <div class="result-header">
-                <p class="result-label">당신의 유형</p>
-                <h1 class="result-type" id="resultType">1-A</h1>
-                <h2 class="result-name" id="resultName">열정적 이상주의자</h2>
-                <p class="result-philosophy" id="resultPhilosophy">니체 + 칸트 + 플라톤</p>
-                <div id="borderlineNote"></div>
-            </div>
-
-            <div class="result-spectrum">
-                <h3 class="section-title">4축 스펙트럼</h3>
-                <div class="spectrum-grid">
-                    <div class="spectrum-item">
-                        <div class="spectrum-header">
-                            <span class="spectrum-name">욕망</span>
-                            <span class="spectrum-value" id="desireValue">32/42</span>
-                        </div>
-                        <div class="spectrum-bar-container">
-                            <span class="spectrum-label-left">부정</span>
-                            <div class="spectrum-bar">
-                                <div class="spectrum-fill" id="desireFill"></div>
-                                <div class="spectrum-marker" id="desireMarker"></div>
-                            </div>
-                            <span class="spectrum-label-right">긍정</span>
-                        </div>
-                        <p class="spectrum-desc" id="desireDesc">삶을 긍정하고 의미를 찾으려 합니다.</p>
-                    </div>
-                    <div class="spectrum-item">
-                        <div class="spectrum-header">
-                            <span class="spectrum-name">실제</span>
-                            <span class="spectrum-value" id="realityValue">18/42</span>
-                        </div>
-                        <div class="spectrum-bar-container">
-                            <span class="spectrum-label-left">부정</span>
-                            <div class="spectrum-bar">
-                                <div class="spectrum-fill" id="realityFill"></div>
-                                <div class="spectrum-marker" id="realityMarker"></div>
-                            </div>
-                            <span class="spectrum-label-right">긍정</span>
-                        </div>
-                        <p class="spectrum-desc" id="realityDesc">실제로 삶을 긍정적으로 경험합니다.</p>
-                    </div>
-                    <div class="spectrum-item">
-                        <div class="spectrum-header">
-                            <span class="spectrum-name">인식</span>
-                            <span class="spectrum-value" id="perceptionValue">20/42</span>
-                        </div>
-                        <div class="spectrum-bar-container">
-                            <span class="spectrum-label-left">다양한 관점</span>
-                            <div class="spectrum-bar">
-                                <div class="spectrum-fill" id="perceptionFill"></div>
-                                <div class="spectrum-marker" id="perceptionMarker"></div>
-                            </div>
-                            <span class="spectrum-label-right">명확한 기준</span>
-                        </div>
-                        <p class="spectrum-desc" id="perceptionDesc">명확한 진리와 기준이 있다고 봅니다.</p>
-                    </div>
-                    <div class="spectrum-item">
-                        <div class="spectrum-header">
-                            <span class="spectrum-name">지향</span>
-                            <span class="spectrum-value" id="orientationValue">35/42</span>
-                        </div>
-                        <div class="spectrum-bar-container">
-                            <span class="spectrum-label-left">현실</span>
-                            <div class="spectrum-bar">
-                                <div class="spectrum-fill" id="orientationFill"></div>
-                                <div class="spectrum-marker" id="orientationMarker"></div>
-                            </div>
-                            <span class="spectrum-label-right">이상</span>
-                        </div>
-                        <p class="spectrum-desc" id="orientationDesc">이상과 원칙을 추구합니다.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="result-section">
-                <h3 class="section-title">유형 설명</h3>
-                <div class="type-description" id="typeDescription">
-                    <!-- Filled by JS -->
-                </div>
-            </div>
-
-            <div class="result-section">
-                <h3 class="section-title">강점과 약점</h3>
-                <div class="strength-weakness">
-                    <div class="sw-column">
-                        <h4 class="sw-title strength-title">강점</h4>
-                        <ul class="sw-list" id="strengthList">
-                            <!-- Filled by JS -->
-                        </ul>
-                    </div>
-                    <div class="sw-column">
-                        <h4 class="sw-title weakness-title">약점</h4>
-                        <ul class="sw-list" id="weaknessList">
-                            <!-- Filled by JS -->
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <div class="result-section">
-                <h3 class="section-title">관계 궁합</h3>
-                <div class="compatibility" id="compatibilitySection">
-                    <!-- Filled by JS -->
-                </div>
-            </div>
-
-            <div class="result-section">
-                <h3 class="section-title">일상 패턴</h3>
-                <div class="daily-patterns" id="dailyPatterns">
-                    <!-- Filled by JS -->
-                </div>
-            </div>
-
-            <div class="result-section">
-                <h3 class="section-title">같은 유형의 인물들</h3>
-                <div class="famous-people" id="famousPeople">
-                    <!-- Filled by JS -->
-                </div>
-            </div>
-
-            <div class="result-section">
-                <h3 class="section-title">위험 신호</h3>
-                <div class="warning-signs" id="warningSigns">
-                    <!-- Filled by JS -->
-                </div>
-            </div>
-
-            <div class="result-section">
-                <h3 class="section-title">추천 콘텐츠</h3>
-                <div class="recommendations" id="recommendations">
-                    <!-- Filled by JS -->
-                </div>
-            </div>
-
-            <div class="result-actions">
-                <button class="btn-share" onclick="shareResult()">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="18" cy="5" r="3" />
-                        <circle cx="6" cy="12" r="3" />
-                        <circle cx="18" cy="19" r="3" />
-                        <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
-                        <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
-                    </svg>
-                    <span>결과 공유하기</span>
-                </button>
-                <button class="btn-retry" onclick="retryTest()">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M1 4v6h6" />
-                        <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10" />
-                    </svg>
-                    <span>다시 하기</span>
-                </button>
-            </div>
-
-            <div class="explore-types">
-                <p>다른 유형도 궁금하다면?</p>
-                <button class="btn-explore" onclick="showAllTypes()">전체 16유형 보기</button>
-            </div>
-
-            <div class="share-modal" id="shareModal">
-                <div class="share-modal-content">
-                    <button class="share-close" onclick="closeShareModal()">×</button>
-                    <h3>결과 공유하기</h3>
-                    <div class="share-card" id="shareCard">
-                        <p class="share-label">나의 삶의 태도 유형</p>
-                        <p class="share-type" id="shareType">1-A</p>
-                        <p class="share-name" id="shareName">열정적 이상주의자</p>
-                        <p class="share-quote" id="shareQuote">"빛을 믿고 빛을 향해 달리는 사람"</p>
-                        <p class="share-url">hyungkwonko.info/mbti</p>
-                    </div>
-                    <div class="share-buttons">
-                        <button class="share-btn twitter" onclick="shareTwitter()">
-                            <span>X (Twitter)</span>
-                        </button>
-                        <button class="share-btn copy" onclick="copyLink()">
-                            <span>링크 복사</span>
-                        </button>
-                    </div>
-                </div>
+                <span class="lang-status">Coming Soon</span>
             </div>
         </div>
 
         <footer class="footer">
-            <p>이 테스트에 대해 더 알고 싶으신가요?</p>
-            <a href="#" onclick="showAbout()" class="footer-link">테스트 소개 보기</a>
-            <div class="copyright">
-                <p>© Kwon Ko (고형권). All Rights Reserved.</p>
-                <p class="copyright-notice">본 저작물은 저작권법에 의해 보호됩니다. 무단 복제, 배포, 수정을 금지합니다.</p>
-            </div>
+            <p>© Kwon Ko (고형권). All Rights Reserved.</p>
         </footer>
-    </section>
-
-    <!-- About Modal -->
-    <div class="about-modal" id="aboutModal">
-        <div class="about-content">
-            <button class="about-close" onclick="closeAbout()">×</button>
-            <h2>삶의 태도 테스트에 대하여</h2>
-            <div class="about-text">
-                <p>이 테스트는 삶을 바라보는 태도를 4개의 축으로 분석합니다.</p>
-
-                <h3>4가지 축</h3>
-                <ul>
-                    <li><strong>욕망</strong>: 삶을 긍정적으로 보고 <em>싶은가</em> vs 그렇지 않은가</li>
-                    <li><strong>실제</strong>: 삶을 실제로 긍정적으로 <em>경험하는가</em> vs 그렇지 않은가</li>
-                    <li><strong>인식</strong>: 명확한 기준이 있다고 보는가 vs 상황마다 다르다고 보는가</li>
-                    <li><strong>지향</strong>: 이상을 추구하는가 vs 현실적으로 선택하는가</li>
-                </ul>
-
-                <h3>기본 4계열</h3>
-                <ul>
-                    <li><strong>1번 계열</strong>: 삶이 좋다고 생각하고, 실제로도 좋게 경험하는 사람들. 에너지 넘치고 적극적.</li>
-                    <li><strong>2번 계열</strong>: 크게 기대하진 않지만, 그래도 나름 괜찮게 살아가는 사람들. 담담하고 현실적.</li>
-                    <li><strong>3번 계열</strong>: 좋은 삶을 원하지만, 현실은 힘든 사람들. 이상과 현실 사이에서 분투 중.</li>
-                    <li><strong>4번 계열</strong>: 기대도 낮고, 실제로도 힘든 사람들. 세상의 어두운 면을 직시하는 편.</li>
-                </ul>
-
-                <h3>A, B, C, D의 의미</h3>
-                <ul>
-                    <li><strong>A</strong>: "정답이 있다" + "이상 추구" → 확고한 신념으로 목표를 향해 가는 타입</li>
-                    <li><strong>B</strong>: "정답이 있다" + "현실 중심" → 원칙은 있되 실용적으로 움직이는 타입</li>
-                    <li><strong>C</strong>: "상황마다 다르다" + "이상 추구" → 열린 마음으로 더 나은 것을 꿈꾸는 타입</li>
-                    <li><strong>D</strong>: "상황마다 다르다" + "현실 중심" → 유연하게 흘러가며 사는 타입</li>
-                </ul>
-
-                <p class="about-note">이 테스트는 심리 진단 도구가 아닙니다. 자기 이해를 위한 하나의 렌즈로 활용해주세요.</p>
-            </div>
-        </div>
     </div>
-
-    <!-- All Types Modal -->
-    <div class="types-modal" id="typesModal">
-        <div class="types-content">
-            <button class="types-close" onclick="closeAllTypes()">×</button>
-            <h2>16가지 유형</h2>
-            <p class="types-subtitle">클릭하면 상세 정보를 볼 수 있습니다</p>
-
-            <div class="types-matrix">
-                <!-- 상단 헤더 -->
-                <div class="matrix-header">
-                    <div class="matrix-corner"></div>
-                    <div class="matrix-col-label">긍정 욕망</div>
-                    <div class="matrix-col-label">부정 욕망</div>
-                </div>
-
-                <!-- 첫번째 행: 실제 긍정 -->
-                <div class="matrix-row">
-                    <div class="matrix-row-label">실제 긍정</div>
-
-                    <!-- 1번 계열 -->
-                    <div class="type-group group-1">
-                        <div class="group-label">1번 계열</div>
-                        <div class="type-card" onclick="viewType('1-A')">
-                            <span class="type-code">1-A</span>
-                            <span class="type-name">열정적 이상주의자</span>
-                        </div>
-                        <div class="type-card" onclick="viewType('1-B')">
-                            <span class="type-code">1-B</span>
-                            <span class="type-name">합리적 낙관주의자</span>
-                        </div>
-                        <div class="type-card" onclick="viewType('1-C')">
-                            <span class="type-code">1-C</span>
-                            <span class="type-name">유연한 이상주의자</span>
-                        </div>
-                        <div class="type-card" onclick="viewType('1-D')">
-                            <span class="type-code">1-D</span>
-                            <span class="type-name">유동적 향유자</span>
-                        </div>
-                    </div>
-
-                    <!-- 2번 계열 -->
-                    <div class="type-group group-2">
-                        <div class="group-label">2번 계열</div>
-                        <div class="type-card" onclick="viewType('2-A')">
-                            <span class="type-code">2-A</span>
-                            <span class="type-name">냉철한 원칙주의자</span>
-                        </div>
-                        <div class="type-card" onclick="viewType('2-B')">
-                            <span class="type-code">2-B</span>
-                            <span class="type-name">담담한 현실주의자</span>
-                        </div>
-                        <div class="type-card" onclick="viewType('2-C')">
-                            <span class="type-code">2-C</span>
-                            <span class="type-name">우아한 냉소가</span>
-                        </div>
-                        <div class="type-card" onclick="viewType('2-D')">
-                            <span class="type-code">2-D</span>
-                            <span class="type-name">가볍게 사는 사람</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 두번째 행: 실제 부정 -->
-                <div class="matrix-row">
-                    <div class="matrix-row-label">실제 부정</div>
-
-                    <!-- 3번 계열 -->
-                    <div class="type-group group-3">
-                        <div class="group-label">3번 계열</div>
-                        <div class="type-card" onclick="viewType('3-A')">
-                            <span class="type-code">3-A</span>
-                            <span class="type-name">상처받은 이상주의자</span>
-                        </div>
-                        <div class="type-card" onclick="viewType('3-B')">
-                            <span class="type-code">3-B</span>
-                            <span class="type-name">지친 현실주의자</span>
-                        </div>
-                        <div class="type-card" onclick="viewType('3-C')">
-                            <span class="type-code">3-C</span>
-                            <span class="type-name">아픈 낭만주의자</span>
-                        </div>
-                        <div class="type-card" onclick="viewType('3-D')">
-                            <span class="type-code">3-D</span>
-                            <span class="type-name">살아남은 사람</span>
-                        </div>
-                    </div>
-
-                    <!-- 4번 계열 -->
-                    <div class="type-group group-4">
-                        <div class="group-label">4번 계열</div>
-                        <div class="type-card" onclick="viewType('4-A')">
-                            <span class="type-code">4-A</span>
-                            <span class="type-name">비관적 진리탐구자</span>
-                        </div>
-                        <div class="type-card" onclick="viewType('4-B')">
-                            <span class="type-code">4-B</span>
-                            <span class="type-name">체계적 비관주의자</span>
-                        </div>
-                        <div class="type-card" onclick="viewType('4-C')">
-                            <span class="type-code">4-C</span>
-                            <span class="type-name">아름다움만 남은 사람</span>
-                        </div>
-                        <div class="type-card" onclick="viewType('4-D')">
-                            <span class="type-code">4-D</span>
-                            <span class="type-name">무감각한 방관자</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="types-legend">
-                <div class="legend-item">
-                    <span class="legend-label">A</span>
-                    <span>정답이 있다 + 이상 추구</span>
-                </div>
-                <div class="legend-item">
-                    <span class="legend-label">B</span>
-                    <span>정답이 있다 + 현실 중심</span>
-                </div>
-                <div class="legend-item">
-                    <span class="legend-label">C</span>
-                    <span>상황마다 다르다 + 이상 추구</span>
-                </div>
-                <div class="legend-item">
-                    <span class="legend-label">D</span>
-                    <span>상황마다 다르다 + 현실 중심</span>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Type Detail Modal -->
-    <div class="type-detail-modal" id="typeDetailModal">
-        <div class="type-detail-content">
-            <button class="type-detail-close" onclick="closeTypeDetail()">×</button>
-            <button class="type-detail-back" onclick="backToAllTypes()">← 전체 유형</button>
-            <div id="typeDetailBody">
-                <!-- Filled by JS -->
-            </div>
-        </div>
-    </div>
-
-    <script src="data.js"></script>
-    <script src="types-group1.js"></script>
-    <script src="types-group2.js"></script>
-    <script src="types-group3.js"></script>
-    <script src="types-group4.js"></script>
-    <script src="script.js"></script>
 </body>
 
 </html>

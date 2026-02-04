@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>마음 좌표 테스트 | 16가지 유형</title>
+    <meta name="description" content="당신의 마음 좌표는 어디인가요? 4가지 축으로 알아보는 16가지 유형">
+    <meta property="og:title" content="마음 좌표 테스트 | 16가지 유형">
+    <meta property="og:description" content="당신의 마음 좌표는 어디인가요? 4가지 축으로 알아보는 16가지 유형">
+    <meta property="og:url" content="https://hyungkwonko.info/mbti/ko/">
+    <meta property="og:type" content="website">
+    <meta name="author" content="Kwon Ko (고형권)">
+    <meta name="copyright" content="© Kwon Ko (고형권). All Rights Reserved.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="../shared/styles.css">
+</head>
+
+<body>
+    <!-- Intro Section -->
+    <section id="intro" class="screen active">
+        <div class="intro-bg"></div>
+        <div class="container">
+            <div class="intro-content">
+                <div class="intro-badge">심리 테스트</div>
+                <h1 class="intro-title">나의 마음 좌표는<br>어디에 있을까</h1>
+                <p class="intro-desc">
+                    4가지 축 × 16가지 유형<br>
+                    내가 삶을 대하는 태도 알아보기
+                </p>
+                <div class="intro-axes">
+                    <div class="axis-item">
+                        <span class="axis-label">기대 수준</span>
+                        <span class="axis-desc">삶이 좋을 수 있다고 기대하는가</span>
+                    </div>
+                    <div class="axis-item">
+                        <span class="axis-label">현재 경험</span>
+                        <span class="axis-desc">지금 실제로 어떤가</span>
+                    </div>
+                    <div class="axis-item">
+                        <span class="axis-label">정답 신념</span>
+                        <span class="axis-desc">삶에 옳은 길이 있다고 믿는가</span>
+                    </div>
+                    <div class="axis-item">
+                        <span class="axis-label">추구 에너지</span>
+                        <span class="axis-desc">더 나은 것을 적극 추구하는가</span>
+                    </div>
+                </div>
+                <button class="btn-start" onclick="startTest()">
+                    <span>시작하기</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+                </button>
+                <button class="btn-types" onclick="showAllTypes()">
+                    <span>16유형 미리보기</span>
+                </button>
+                <p class="intro-time">24문항 · 5분</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Test Section -->
+    <section id="test" class="screen">
+        <div class="container">
+            <div class="test-header">
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <span class="progress-text" id="progressText">1 / 24</span>
+                </div>
+            </div>
+            <div class="question-container" id="questionContainer">
+                <p class="question-number" id="questionNumber">Q1</p>
+                <h2 class="question-text" id="questionText"></h2>
+                <div class="answer-scale">
+                    <div class="scale-labels">
+                        <span>전혀 아니다</span>
+                        <span>매우 그렇다</span>
+                    </div>
+                    <div class="scale-buttons" id="scaleButtons">
+                        <button class="scale-btn" data-value="1">1</button>
+                        <button class="scale-btn" data-value="2">2</button>
+                        <button class="scale-btn" data-value="3">3</button>
+                        <button class="scale-btn" data-value="4">4</button>
+                        <button class="scale-btn" data-value="5">5</button>
+                        <button class="scale-btn" data-value="6">6</button>
+                        <button class="scale-btn" data-value="7">7</button>
+                    </div>
+                </div>
+            </div>
+            <div class="test-nav">
+                <button class="btn-nav btn-prev" id="btnPrev" onclick="prevQuestion()" disabled>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M19 12H5M12 19l-7-7 7-7" />
+                    </svg>
+                    <span>이전</span>
+                </button>
+                <button class="btn-nav btn-next" id="btnNext" onclick="nextQuestion()" disabled>
+                    <span>다음</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Result Section -->
+    <section id="result" class="screen">
+        <div class="container">
+            <div class="result-header">
+                <p class="result-label">당신의 유형</p>
+                <h1 class="result-type" id="resultType">1-A</h1>
+                <h2 class="result-name" id="resultName">희망회로 MAX</h2>
+                <p class="result-philosophy" id="resultPhilosophy">플라톤적 이상주의</p>
+                <div id="borderlineNote"></div>
+            </div>
+
+            <div class="result-spectrum">
+                <h3 class="section-title">4축 스펙트럼</h3>
+                <div class="spectrum-grid">
+                    <div class="spectrum-item">
+                        <div class="spectrum-header">
+                            <span class="spectrum-name">기대 수준</span>
+                            <span class="spectrum-value" id="expectationValue">32/42</span>
+                        </div>
+                        <div class="spectrum-bar-container">
+                            <span class="spectrum-label-left">낮음</span>
+                            <div class="spectrum-bar">
+                                <div class="spectrum-fill" id="expectationFill"></div>
+                                <div class="spectrum-marker" id="expectationMarker"></div>
+                            </div>
+                            <span class="spectrum-label-right">높음</span>
+                        </div>
+                        <p class="spectrum-desc" id="expectationDesc">삶이 좋을 수 있다고 기대합니다.</p>
+                    </div>
+                    <div class="spectrum-item">
+                        <div class="spectrum-header">
+                            <span class="spectrum-name">현재 경험</span>
+                            <span class="spectrum-value" id="experienceValue">18/42</span>
+                        </div>
+                        <div class="spectrum-bar-container">
+                            <span class="spectrum-label-left">나쁨</span>
+                            <div class="spectrum-bar">
+                                <div class="spectrum-fill" id="experienceFill"></div>
+                                <div class="spectrum-marker" id="experienceMarker"></div>
+                            </div>
+                            <span class="spectrum-label-right">좋음</span>
+                        </div>
+                        <p class="spectrum-desc" id="experienceDesc">실제로 삶을 긍정적으로 경험합니다.</p>
+                    </div>
+                    <div class="spectrum-item">
+                        <div class="spectrum-header">
+                            <span class="spectrum-name">정답 신념</span>
+                            <span class="spectrum-value" id="beliefValue">20/42</span>
+                        </div>
+                        <div class="spectrum-bar-container">
+                            <span class="spectrum-label-left">없음</span>
+                            <div class="spectrum-bar">
+                                <div class="spectrum-fill" id="beliefFill"></div>
+                                <div class="spectrum-marker" id="beliefMarker"></div>
+                            </div>
+                            <span class="spectrum-label-right">있음</span>
+                        </div>
+                        <p class="spectrum-desc" id="beliefDesc">삶에 옳은 길이 있다고 믿습니다.</p>
+                    </div>
+                    <div class="spectrum-item">
+                        <div class="spectrum-header">
+                            <span class="spectrum-name">추구 에너지</span>
+                            <span class="spectrum-value" id="energyValue">35/42</span>
+                        </div>
+                        <div class="spectrum-bar-container">
+                            <span class="spectrum-label-left">수용</span>
+                            <div class="spectrum-bar">
+                                <div class="spectrum-fill" id="energyFill"></div>
+                                <div class="spectrum-marker" id="energyMarker"></div>
+                            </div>
+                            <span class="spectrum-label-right">능동</span>
+                        </div>
+                        <p class="spectrum-desc" id="energyDesc">더 나은 것을 적극적으로 추구합니다.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="result-section">
+                <h3 class="section-title">유형 설명</h3>
+                <div class="type-description" id="typeDescription">
+                    <!-- Filled by JS -->
+                </div>
+            </div>
+
+            <div class="result-section">
+                <h3 class="section-title">강점과 약점</h3>
+                <div class="strength-weakness">
+                    <div class="sw-column">
+                        <h4 class="sw-title strength-title">강점</h4>
+                        <ul class="sw-list" id="strengthList">
+                            <!-- Filled by JS -->
+                        </ul>
+                    </div>
+                    <div class="sw-column">
+                        <h4 class="sw-title weakness-title">약점</h4>
+                        <ul class="sw-list" id="weaknessList">
+                            <!-- Filled by JS -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="result-section">
+                <h3 class="section-title">관계 궁합</h3>
+                <div class="compatibility" id="compatibilitySection">
+                    <!-- Filled by JS -->
+                </div>
+            </div>
+
+            <div class="result-section">
+                <h3 class="section-title">일상 패턴</h3>
+                <div class="daily-patterns" id="dailyPatterns">
+                    <!-- Filled by JS -->
+                </div>
+            </div>
+
+            <div class="result-section">
+                <h3 class="section-title">내면 세계</h3>
+                <div class="inner-world" id="innerWorld">
+                    <!-- Filled by JS -->
+                </div>
+            </div>
+
+            <div class="result-section">
+                <h3 class="section-title">대표 말버릇</h3>
+                <div class="speech-patterns" id="speechPatterns">
+                    <!-- Filled by JS -->
+                </div>
+            </div>
+
+            <div class="result-section">
+                <h3 class="section-title">같은 유형의 인물들</h3>
+                <div class="famous-people" id="famousPeople">
+                    <!-- Filled by JS -->
+                </div>
+            </div>
+
+            <div class="result-section">
+                <h3 class="section-title">위험 신호</h3>
+                <div class="warning-signs" id="warningSigns">
+                    <!-- Filled by JS -->
+                </div>
+            </div>
+
+            <div class="result-section">
+                <h3 class="section-title">추천 콘텐츠</h3>
+                <div class="recommendations" id="recommendations">
+                    <!-- Filled by JS -->
+                </div>
+            </div>
+
+            <div class="result-actions">
+                <button class="btn-share" onclick="shareResult()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="18" cy="5" r="3" />
+                        <circle cx="6" cy="12" r="3" />
+                        <circle cx="18" cy="19" r="3" />
+                        <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
+                        <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
+                    </svg>
+                    <span>결과 공유하기</span>
+                </button>
+                <button class="btn-retry" onclick="retryTest()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M1 4v6h6" />
+                        <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10" />
+                    </svg>
+                    <span>다시 하기</span>
+                </button>
+            </div>
+
+            <div class="explore-types">
+                <p>다른 유형도 궁금하다면?</p>
+                <button class="btn-explore" onclick="showAllTypes()">전체 16유형 보기</button>
+            </div>
+
+            <div class="share-modal" id="shareModal">
+                <div class="share-modal-content">
+                    <button class="share-close" onclick="closeShareModal()">×</button>
+                    <h3>결과 공유하기</h3>
+                    <div class="share-card" id="shareCard">
+                        <p class="share-label">나의 마음 좌표</p>
+                        <p class="share-type" id="shareType">1-A</p>
+                        <p class="share-name" id="shareName">희망회로 MAX</p>
+                        <p class="share-quote" id="shareQuote">"빛을 믿고 빛을 향해 달리는 사람"</p>
+                        <p class="share-url">hyungkwonko.info/mbti</p>
+                    </div>
+                    <div class="share-buttons">
+                        <button class="share-btn twitter" onclick="shareTwitter()">
+                            <span>X (Twitter)</span>
+                        </button>
+                        <button class="share-btn copy" onclick="copyLink()">
+                            <span>링크 복사</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <p>이 테스트에 대해 더 알고 싶으신가요?</p>
+            <a href="#" onclick="showAbout()" class="footer-link">테스트 소개 보기</a>
+            <div class="copyright">
+                <p>© Kwon Ko (고형권). All Rights Reserved.</p>
+                <p class="copyright-notice">본 저작물은 저작권법에 의해 보호됩니다. 무단 복제, 배포, 수정을 금지합니다.</p>
+            </div>
+        </footer>
+    </section>
+
+    <!-- About Modal -->
+    <div class="about-modal" id="aboutModal">
+        <div class="about-content">
+            <button class="about-close" onclick="closeAbout()">×</button>
+            <h2>마음 좌표 테스트에 대하여</h2>
+            <div class="about-text">
+                <p>이 테스트는 삶을 바라보는 태도를 4개의 축으로 분석합니다.</p>
+
+                <h3>4가지 축</h3>
+                <ul>
+                    <li><strong>기대 수준</strong>: 삶이 좋을 수 있다고 <em>기대하는가</em> vs 기대가 낮은가</li>
+                    <li><strong>현재 경험</strong>: 지금 실제로 <em>좋은가</em> vs 힘든가</li>
+                    <li><strong>정답 신념</strong>: 삶에 옳은 길이 <em>있다고 믿는가</em> vs 없다고 보는가</li>
+                    <li><strong>추구 에너지</strong>: 더 나은 것을 <em>적극 추구하는가</em> vs 흘러가는 대로 수용하는가</li>
+                </ul>
+
+                <h3>기본 4계열</h3>
+                <ul>
+                    <li><strong>1번 계열</strong>: 기대도 높고, 실제로도 좋은 사람들. 에너지 넘치고 긍정적.</li>
+                    <li><strong>2번 계열</strong>: 기대는 낮지만, 실제로는 괜찮은 사람들. 담담하고 현실적.</li>
+                    <li><strong>3번 계열</strong>: 기대는 높은데, 실제로는 힘든 사람들. 이상과 현실 사이에서 분투 중.</li>
+                    <li><strong>4번 계열</strong>: 기대도 낮고, 실제로도 힘든 사람들. 세상의 어두운 면을 직시하는 편.</li>
+                </ul>
+
+                <h3>A, B, C, D의 의미</h3>
+                <ul>
+                    <li><strong>A</strong>: "정답이 있다" + "능동 추구" → 확고한 신념으로 목표를 향해 가는 타입</li>
+                    <li><strong>B</strong>: "정답이 있다" + "수용" → 원칙은 있되 현실에 맞게 적용하는 타입</li>
+                    <li><strong>C</strong>: "정답이 없다" + "능동 추구" → 열린 마음으로 더 나은 것을 찾는 타입</li>
+                    <li><strong>D</strong>: "정답이 없다" + "수용" → 유연하게 흘러가며 사는 타입</li>
+                </ul>
+
+                <p class="about-note">이 테스트는 심리 진단 도구가 아닙니다. 자기 이해를 위한 하나의 렌즈로 활용해주세요.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- All Types Modal -->
+    <div class="types-modal" id="typesModal">
+        <div class="types-content">
+            <button class="types-close" onclick="closeAllTypes()">×</button>
+            <h2>16가지 유형</h2>
+            <p class="types-subtitle">클릭하면 상세 정보를 볼 수 있습니다</p>
+
+            <div class="types-matrix">
+                <!-- 상단 헤더 -->
+                <div class="matrix-header">
+                    <div class="matrix-corner"></div>
+                    <div class="matrix-col-label">기대 높음</div>
+                    <div class="matrix-col-label">기대 낮음</div>
+                </div>
+
+                <!-- 첫번째 행: 현재 좋음 -->
+                <div class="matrix-row">
+                    <div class="matrix-row-label">현재 좋음</div>
+
+                    <!-- 1번 계열 -->
+                    <div class="type-group group-1">
+                        <div class="group-label">1번 계열</div>
+                        <div class="type-card" onclick="viewType('1-A')">
+                            <span class="type-code">1-A</span>
+                            <span class="type-name">희망회로 MAX</span>
+                        </div>
+                        <div class="type-card" onclick="viewType('1-B')">
+                            <span class="type-code">1-B</span>
+                            <span class="type-name">계획형 인간</span>
+                        </div>
+                        <div class="type-card" onclick="viewType('1-C')">
+                            <span class="type-code">1-C</span>
+                            <span class="type-name">가능성 덕후</span>
+                        </div>
+                        <div class="type-card" onclick="viewType('1-D')">
+                            <span class="type-code">1-D</span>
+                            <span class="type-name">행복 100%</span>
+                        </div>
+                    </div>
+
+                    <!-- 2번 계열 -->
+                    <div class="type-group group-2">
+                        <div class="group-label">2번 계열</div>
+                        <div class="type-card" onclick="viewType('2-A')">
+                            <span class="type-code">2-A</span>
+                            <span class="type-name">원칙 봇</span>
+                        </div>
+                        <div class="type-card" onclick="viewType('2-B')">
+                            <span class="type-code">2-B</span>
+                            <span class="type-name">'원래 그래'</span>
+                        </div>
+                        <div class="type-card" onclick="viewType('2-C')">
+                            <span class="type-code">2-C</span>
+                            <span class="type-name">거리두기 장인</span>
+                        </div>
+                        <div class="type-card" onclick="viewType('2-D')">
+                            <span class="type-code">2-D</span>
+                            <span class="type-name">집착 제로</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 두번째 행: 현재 나쁨 -->
+                <div class="matrix-row">
+                    <div class="matrix-row-label">현재 나쁨</div>
+
+                    <!-- 3번 계열 -->
+                    <div class="type-group group-3">
+                        <div class="group-label">3번 계열</div>
+                        <div class="type-card" onclick="viewType('3-A')">
+                            <span class="type-code">3-A</span>
+                            <span class="type-name">'이건 진짜 아닌데'</span>
+                        </div>
+                        <div class="type-card" onclick="viewType('3-B')">
+                            <span class="type-code">3-B</span>
+                            <span class="type-name">번아웃 직전</span>
+                        </div>
+                        <div class="type-card" onclick="viewType('3-C')">
+                            <span class="type-code">3-C</span>
+                            <span class="type-name">의미 찾아 여행중</span>
+                        </div>
+                        <div class="type-card" onclick="viewType('3-D')">
+                            <span class="type-code">3-D</span>
+                            <span class="type-name">숨쉰채 발견</span>
+                        </div>
+                    </div>
+
+                    <!-- 4번 계열 -->
+                    <div class="type-group group-4">
+                        <div class="group-label">4번 계열</div>
+                        <div class="type-card" onclick="viewType('4-A')">
+                            <span class="type-code">4-A</span>
+                            <span class="type-name">우울한 철학자</span>
+                        </div>
+                        <div class="type-card" onclick="viewType('4-B')">
+                            <span class="type-code">4-B</span>
+                            <span class="type-name">체계적 비관주의자</span>
+                        </div>
+                        <div class="type-card" onclick="viewType('4-C')">
+                            <span class="type-code">4-C</span>
+                            <span class="type-name">느낌만 좋음</span>
+                        </div>
+                        <div class="type-card" onclick="viewType('4-D')">
+                            <span class="type-code">4-D</span>
+                            <span class="type-name">없을 무</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="types-legend">
+                <div class="legend-item">
+                    <span class="legend-label">A</span>
+                    <span>정답 있음 + 능동 추구</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-label">B</span>
+                    <span>정답 있음 + 수용</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-label">C</span>
+                    <span>정답 없음 + 능동 추구</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-label">D</span>
+                    <span>정답 없음 + 수용</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Type Detail Modal -->
+    <div class="type-detail-modal" id="typeDetailModal">
+        <div class="type-detail-content">
+            <button class="type-detail-close" onclick="closeTypeDetail()">×</button>
+            <button class="type-detail-back" onclick="backToAllTypes()">← 전체 유형</button>
+            <div id="typeDetailBody">
+                <!-- Filled by JS -->
+            </div>
+        </div>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="types/types-1a.js"></script>
+    <script src="types/types-1b.js"></script>
+    <script src="types/types-1c.js"></script>
+    <script src="types/types-1d.js"></script>
+    <script src="types/types-2a.js"></script>
+    <script src="types/types-2b.js"></script>
+    <script src="types/types-2c.js"></script>
+    <script src="types/types-2d.js"></script>
+    <script src="types/types-3a.js"></script>
+    <script src="types/types-3b.js"></script>
+    <script src="types/types-3c.js"></script>
+    <script src="types/types-3d.js"></script>
+    <script src="types/types-4a.js"></script>
+    <script src="types/types-4b.js"></script>
+    <script src="types/types-4c.js"></script>
+    <script src="types/types-4d.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

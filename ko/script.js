@@ -136,12 +136,13 @@ function nextQuestion() {
 }
 
 // Calculate results
+// v3 축 이름: expectation(기대수준), experience(현재경험), belief(정답신념), energy(추구에너지)
 function calculateResult() {
     const scores = {
-        desire: 0,
-        reality: 0,
-        perception: 0,
-        orientation: 0
+        expectation: 0,  // 축1: 기대 수준 (높음/낮음)
+        experience: 0,   // 축2: 현재 경험 (좋음/나쁨)
+        belief: 0,       // 축3: 정답 신념 (있음/없음)
+        energy: 0        // 축4: 추구 에너지 (능동/수용)
     };
     
     // Calculate scores for each axis
@@ -152,24 +153,33 @@ function calculateResult() {
     });
     
     // Determine type code
-    const desirePositive = scores.desire > 24;
-    const realityPositive = scores.reality > 24;
-    const perceptionModern = scores.perception > 24;
-    const orientationIdeal = scores.orientation > 24;
+    // 축1: 기대 수준 - 높으면 1,3 / 낮으면 2,4
+    // 축2: 현재 경험 - 좋으면 1,2 / 나쁘면 3,4
+    const expectationHigh = scores.expectation > 24;
+    const experienceGood = scores.experience > 24;
+    const beliefExists = scores.belief > 24;      // 정답 있음 → A,B
+    const energyActive = scores.energy > 24;       // 능동 추구 → A,C
     
-    // Base type (1-4): desire × reality
+    // Base type (1-4): expectation × experience
+    // 1: 기대 높음 + 현재 좋음
+    // 2: 기대 낮음 + 현재 좋음
+    // 3: 기대 높음 + 현재 나쁨
+    // 4: 기대 낮음 + 현재 나쁨
     let baseType;
-    if (desirePositive && realityPositive) baseType = '1';
-    else if (!desirePositive && realityPositive) baseType = '2';
-    else if (desirePositive && !realityPositive) baseType = '3';
+    if (expectationHigh && experienceGood) baseType = '1';
+    else if (!expectationHigh && experienceGood) baseType = '2';
+    else if (expectationHigh && !experienceGood) baseType = '3';
     else baseType = '4';
     
-    // Subtype (A-D): perception × orientation
-    // A: 모던 + 이상, B: 모던 + 현실, C: 포스트모던 + 이상, D: 포스트모던 + 현실
+    // Subtype (A-D): belief × energy
+    // A: 정답 있음 + 능동 추구
+    // B: 정답 있음 + 수용
+    // C: 정답 없음 + 능동 추구
+    // D: 정답 없음 + 수용
     let subType;
-    if (perceptionModern && orientationIdeal) subType = 'A';
-    else if (perceptionModern && !orientationIdeal) subType = 'B';
-    else if (!perceptionModern && orientationIdeal) subType = 'C';
+    if (beliefExists && energyActive) subType = 'A';
+    else if (beliefExists && !energyActive) subType = 'B';
+    else if (!beliefExists && energyActive) subType = 'C';
     else subType = 'D';
     
     const typeCode = `${baseType}-${subType}`;
@@ -209,21 +219,21 @@ function displayResult(typeCode, scores) {
     document.getElementById('weaknessList').innerHTML = type.weaknesses
         .map(w => `<li>${w}</li>`).join('');
     
-    // Compatibility - 연애, 친구, 직장으로 세분화
+    // Compatibility - 연애, 친구, 직장
     document.getElementById('compatibilitySection').innerHTML = `
         <div class="compat-category">
             <h4 class="compat-category-title">💕 연애</h4>
             <div class="compat-item">
                 <span class="compat-icon">💚</span>
                 <div class="compat-content">
-                    <h4>잘 맞는 유형: <span class="compat-type">${type.compatibility.love.best.type} ${type.compatibility.love.best.name}</span></h4>
+                    <h4>잘 맞는 유형: <span class="compat-type">${type.compatibility.love.best.type}</span></h4>
                     <p>${type.compatibility.love.best.reason}</p>
                 </div>
             </div>
             <div class="compat-item">
                 <span class="compat-icon">💔</span>
                 <div class="compat-content">
-                    <h4>어려운 유형: <span class="compat-type">${type.compatibility.love.hard.type} ${type.compatibility.love.hard.name}</span></h4>
+                    <h4>어려운 유형: <span class="compat-type">${type.compatibility.love.hard.type}</span></h4>
                     <p>${type.compatibility.love.hard.reason}</p>
                 </div>
             </div>
@@ -233,14 +243,14 @@ function displayResult(typeCode, scores) {
             <div class="compat-item">
                 <span class="compat-icon">💚</span>
                 <div class="compat-content">
-                    <h4>잘 맞는 유형: <span class="compat-type">${type.compatibility.friend.best.type} ${type.compatibility.friend.best.name}</span></h4>
+                    <h4>잘 맞는 유형: <span class="compat-type">${type.compatibility.friend.best.type}</span></h4>
                     <p>${type.compatibility.friend.best.reason}</p>
                 </div>
             </div>
             <div class="compat-item">
                 <span class="compat-icon">💔</span>
                 <div class="compat-content">
-                    <h4>어려운 유형: <span class="compat-type">${type.compatibility.friend.hard.type} ${type.compatibility.friend.hard.name}</span></h4>
+                    <h4>어려운 유형: <span class="compat-type">${type.compatibility.friend.hard.type}</span></h4>
                     <p>${type.compatibility.friend.hard.reason}</p>
                 </div>
             </div>
@@ -250,14 +260,14 @@ function displayResult(typeCode, scores) {
             <div class="compat-item">
                 <span class="compat-icon">💚</span>
                 <div class="compat-content">
-                    <h4>잘 맞는 유형: <span class="compat-type">${type.compatibility.work.best.type} ${type.compatibility.work.best.name}</span></h4>
+                    <h4>잘 맞는 유형: <span class="compat-type">${type.compatibility.work.best.type}</span></h4>
                     <p>${type.compatibility.work.best.reason}</p>
                 </div>
             </div>
             <div class="compat-item">
                 <span class="compat-icon">💔</span>
                 <div class="compat-content">
-                    <h4>어려운 유형: <span class="compat-type">${type.compatibility.work.hard.type} ${type.compatibility.work.hard.name}</span></h4>
+                    <h4>어려운 유형: <span class="compat-type">${type.compatibility.work.hard.type}</span></h4>
                     <p>${type.compatibility.work.hard.reason}</p>
                 </div>
             </div>
@@ -267,17 +277,65 @@ function displayResult(typeCode, scores) {
     // Daily Patterns
     document.getElementById('dailyPatterns').innerHTML = `
         <div class="pattern-item">
-            <h4>스트레스 받을 때</h4>
-            <p>${type.patterns.stress}</p>
+            <h4>☀️ 아침</h4>
+            <p>${type.dailyPatterns.morning}</p>
         </div>
         <div class="pattern-item">
-            <h4>기분 좋을 때</h4>
-            <p>${type.patterns.happy}</p>
+            <h4>💼 일할 때</h4>
+            <p>${type.dailyPatterns.work}</p>
         </div>
         <div class="pattern-item">
-            <h4>갈등 상황에서</h4>
-            <p>${type.patterns.conflict}</p>
+            <h4>🌙 저녁</h4>
+            <p>${type.dailyPatterns.evening}</p>
         </div>
+        <div class="pattern-item">
+            <h4>🎉 주말</h4>
+            <p>${type.dailyPatterns.weekend}</p>
+        </div>
+        <div class="pattern-item">
+            <h4>😰 스트레스 받을 때</h4>
+            <p>${type.dailyPatterns.stress}</p>
+        </div>
+        <div class="pattern-item">
+            <h4>😊 기분 좋을 때</h4>
+            <p>${type.dailyPatterns.happy}</p>
+        </div>
+        <div class="pattern-item">
+            <h4>⚡ 갈등 상황에서</h4>
+            <p>${type.dailyPatterns.conflict}</p>
+        </div>
+    `;
+    
+    // Inner World (NEW in v3)
+    document.getElementById('innerWorld').innerHTML = `
+        <div class="inner-world-item core-desire">
+            <h4>💚 진짜 원하는 것</h4>
+            <p>${type.innerWorld.coreDesire}</p>
+        </div>
+        <div class="inner-world-item core-fear">
+            <h4>💔 가장 피하고 싶은 것</h4>
+            <p>${type.innerWorld.coreFear}</p>
+        </div>
+        <div class="inner-world-item inner-child">
+            <h4>👶 내면 아이</h4>
+            <p>${type.innerWorld.innerChild}</p>
+        </div>
+        <div class="inner-world-item shadow-side">
+            <h4>🌑 그림자</h4>
+            <p>${type.innerWorld.shadowSide}</p>
+        </div>
+        <div class="inner-world-item growth-path">
+            <h4>🌱 성장 방향</h4>
+            <p>${type.innerWorld.growthPath}</p>
+        </div>
+    `;
+    
+    // Speech Patterns (NEW in v3)
+    document.getElementById('speechPatterns').innerHTML = `
+        <div class="speech-phrases">
+            ${type.speechPatterns.phrases.map(phrase => `<span class="speech-phrase">${phrase}</span>`).join('')}
+        </div>
+        <p class="speech-function"><strong>심리적 기능:</strong> ${type.speechPatterns.function}</p>
     `;
     
     // Famous People
@@ -313,7 +371,7 @@ function displayResult(typeCode, scores) {
         ${dangerHtml}
     `;
     
-    // Recommendations - 새로운 형식
+    // Recommendations
     document.getElementById('recommendations').innerHTML = `
         <div class="rec-category">
             <h4>📚 책</h4>
@@ -332,16 +390,16 @@ function displayResult(typeCode, scores) {
     // Share card data
     document.getElementById('shareType').textContent = type.code;
     document.getElementById('shareName').textContent = type.name;
-    document.getElementById('shareQuote').textContent = `"${typeQuotes[type.code]}"`;
+    document.getElementById('shareQuote').textContent = `"${typeQuotes[type.code] || type.name}"`;
 }
 
-// Borderline detection
+// Borderline detection (v3 축 이름으로 업데이트)
 function getBorderlineAxes(scores) {
     const borderline = [];
-    if (scores.desire >= 22 && scores.desire <= 26) borderline.push('desire');
-    if (scores.reality >= 22 && scores.reality <= 26) borderline.push('reality');
-    if (scores.perception >= 22 && scores.perception <= 26) borderline.push('perception');
-    if (scores.orientation >= 22 && scores.orientation <= 26) borderline.push('orientation');
+    if (scores.expectation >= 22 && scores.expectation <= 26) borderline.push('expectation');
+    if (scores.experience >= 22 && scores.experience <= 26) borderline.push('experience');
+    if (scores.belief >= 22 && scores.belief <= 26) borderline.push('belief');
+    if (scores.energy >= 22 && scores.energy <= 26) borderline.push('energy');
     return borderline;
 }
 
@@ -349,26 +407,26 @@ function getAdjacentTypes(mainType, borderlineAxes) {
     const [base, sub] = mainType.split('-');
     const adjacent = [];
     
-    // desire 경계 → 1↔3, 2↔4
-    if (borderlineAxes.includes('desire')) {
+    // expectation(기대수준) 경계 → 1↔3, 2↔4
+    if (borderlineAxes.includes('expectation')) {
         const altBase = { '1': '3', '3': '1', '2': '4', '4': '2' };
         adjacent.push(`${altBase[base]}-${sub}`);
     }
     
-    // reality 경계 → 1↔2, 3↔4
-    if (borderlineAxes.includes('reality')) {
+    // experience(현재경험) 경계 → 1↔2, 3↔4
+    if (borderlineAxes.includes('experience')) {
         const altBase = { '1': '2', '2': '1', '3': '4', '4': '3' };
         adjacent.push(`${altBase[base]}-${sub}`);
     }
     
-    // perception 경계 (모던↔포스트모던) → A↔C, B↔D
-    if (borderlineAxes.includes('perception')) {
+    // belief(정답신념) 경계 → A↔C, B↔D
+    if (borderlineAxes.includes('belief')) {
         const altSub = { 'A': 'C', 'C': 'A', 'B': 'D', 'D': 'B' };
         adjacent.push(`${base}-${altSub[sub]}`);
     }
     
-    // orientation 경계 (이상↔현실) → A↔B, C↔D
-    if (borderlineAxes.includes('orientation')) {
+    // energy(추구에너지) 경계 → A↔B, C↔D
+    if (borderlineAxes.includes('energy')) {
         const altSub = { 'A': 'B', 'B': 'A', 'C': 'D', 'D': 'C' };
         adjacent.push(`${base}-${altSub[sub]}`);
     }
@@ -403,42 +461,43 @@ function displayBorderlineTypes(typeCode, scores) {
     }
 }
 
+// Spectrum display (v3 축 이름으로 업데이트)
 function displaySpectrum(scores) {
-    // Desire (욕망)
-    const desirePercent = ((scores.desire - 6) / 36) * 100;
-    document.getElementById('desireValue').textContent = `${Math.round(desirePercent)}점`;
-    document.getElementById('desireFill').style.width = `${desirePercent}%`;
-    document.getElementById('desireMarker').style.left = `${desirePercent}%`;
-    document.getElementById('desireDesc').textContent = scores.desire > 24 
-        ? '삶을 긍정하고 의미를 찾으려 합니다.'
+    // 축1: 기대 수준 (Expectation)
+    const expectationPercent = ((scores.expectation - 6) / 36) * 100;
+    document.getElementById('expectationValue').textContent = `${Math.round(expectationPercent)}점`;
+    document.getElementById('expectationFill').style.width = `${expectationPercent}%`;
+    document.getElementById('expectationMarker').style.left = `${expectationPercent}%`;
+    document.getElementById('expectationDesc').textContent = scores.expectation > 24 
+        ? '삶이 좋을 수 있다고 기대합니다.'
         : '삶에 대한 기대를 낮추는 편입니다.';
     
-    // Reality (실제)
-    const realityPercent = ((scores.reality - 6) / 36) * 100;
-    document.getElementById('realityValue').textContent = `${Math.round(realityPercent)}점`;
-    document.getElementById('realityFill').style.width = `${realityPercent}%`;
-    document.getElementById('realityMarker').style.left = `${realityPercent}%`;
-    document.getElementById('realityDesc').textContent = scores.reality > 24 
-        ? '실제로 삶을 긍정적으로 경험합니다.'
-        : '실제 경험은 힘든 편입니다.';
+    // 축2: 현재 경험 (Experience)
+    const experiencePercent = ((scores.experience - 6) / 36) * 100;
+    document.getElementById('experienceValue').textContent = `${Math.round(experiencePercent)}점`;
+    document.getElementById('experienceFill').style.width = `${experiencePercent}%`;
+    document.getElementById('experienceMarker').style.left = `${experiencePercent}%`;
+    document.getElementById('experienceDesc').textContent = scores.experience > 24 
+        ? '지금 실제로 삶이 좋습니다.'
+        : '지금 실제로 삶이 힘듭니다.';
     
-    // Perception (인식)
-    const perceptionPercent = ((scores.perception - 6) / 36) * 100;
-    document.getElementById('perceptionValue').textContent = `${Math.round(perceptionPercent)}점`;
-    document.getElementById('perceptionFill').style.width = `${perceptionPercent}%`;
-    document.getElementById('perceptionMarker').style.left = `${perceptionPercent}%`;
-    document.getElementById('perceptionDesc').textContent = scores.perception > 24 
-        ? '명확한 진리와 기준이 있다고 봅니다.'
-        : '모든 것은 관점에 따라 다르다고 봅니다.';
+    // 축3: 정답 신념 (Belief)
+    const beliefPercent = ((scores.belief - 6) / 36) * 100;
+    document.getElementById('beliefValue').textContent = `${Math.round(beliefPercent)}점`;
+    document.getElementById('beliefFill').style.width = `${beliefPercent}%`;
+    document.getElementById('beliefMarker').style.left = `${beliefPercent}%`;
+    document.getElementById('beliefDesc').textContent = scores.belief > 24 
+        ? '삶에 옳은 길이 있다고 믿습니다.'
+        : '정답은 없고 상황마다 다르다고 봅니다.';
     
-    // Orientation (지향)
-    const orientationPercent = ((scores.orientation - 6) / 36) * 100;
-    document.getElementById('orientationValue').textContent = `${Math.round(orientationPercent)}점`;
-    document.getElementById('orientationFill').style.width = `${orientationPercent}%`;
-    document.getElementById('orientationMarker').style.left = `${orientationPercent}%`;
-    document.getElementById('orientationDesc').textContent = scores.orientation > 24 
-        ? '이상과 원칙을 추구합니다.'
-        : '현실적이고 실용적인 선택을 합니다.';
+    // 축4: 추구 에너지 (Energy)
+    const energyPercent = ((scores.energy - 6) / 36) * 100;
+    document.getElementById('energyValue').textContent = `${Math.round(energyPercent)}점`;
+    document.getElementById('energyFill').style.width = `${energyPercent}%`;
+    document.getElementById('energyMarker').style.left = `${energyPercent}%`;
+    document.getElementById('energyDesc').textContent = scores.energy > 24 
+        ? '더 나은 것을 적극적으로 추구합니다.'
+        : '흘러가는 대로 수용하는 편입니다.';
 }
 
 // Share functions
@@ -454,7 +513,7 @@ function shareTwitter() {
     const type = document.getElementById('shareType').textContent;
     const name = document.getElementById('shareName').textContent;
     const quote = document.getElementById('shareQuote').textContent;
-    const text = `나의 삶의 태도 유형: ${type} ${name}\n${quote}\n\n당신은 어떤 유형인가요?`;
+    const text = `나의 마음 좌표: ${type} ${name}\n${quote}\n\n당신의 마음 좌표는 어디인가요?`;
     const url = 'https://hyungkwonko.info/mbti';
     window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`, '_blank');
 }
@@ -547,8 +606,6 @@ document.addEventListener('click', (e) => {
     }
 });
 
-// Close type detail on outside click - handled in the new event listener above
-
 // Keyboard navigation
 document.addEventListener('keydown', (e) => {
     if (screens.test.classList.contains('active')) {
@@ -606,6 +663,12 @@ function viewType(typeCode) {
         <div class="type-detail-section">
             <h3>약점</h3>
             <ul>${type.weaknesses.map(w => `<li>${w}</li>`).join('')}</ul>
+        </div>
+        
+        <div class="type-detail-section">
+            <h3>대표 말버릇</h3>
+            <p>${type.speechPatterns.phrases.map(p => `"${p}"`).join(', ')}</p>
+            <p><em>${type.speechPatterns.function}</em></p>
         </div>
         
         <div class="type-detail-section">
