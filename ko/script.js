@@ -135,6 +135,22 @@ function nextQuestion() {
     }
 }
 
+// Helper: famous 항목을 string 또는 {name, reason} 모두 처리
+function renderFamousName(item) {
+    if (typeof item === 'string') return item;
+    return item.name || '';
+}
+
+function renderFamousListItem(item) {
+    if (typeof item === 'string') {
+        return `<li>${item}</li>`;
+    }
+    if (item.reason) {
+        return `<li><strong>${item.name}</strong><span>${item.reason}</span></li>`;
+    }
+    return `<li>${item.name}</li>`;
+}
+
 // Calculate results
 // v3 축 이름: expectation(기대수준), experience(현재경험), belief(정답신념), energy(추구에너지)
 function calculateResult() {
@@ -338,19 +354,19 @@ function displayResult(typeCode, scores) {
         <p class="speech-function"><strong>심리적 기능:</strong> ${type.speechPatterns.function}</p>
     `;
     
-    // Famous People
+    // Famous People — {name, reason} 또는 string 모두 지원
     document.getElementById('famousPeople').innerHTML = `
         <div class="famous-category">
             <h4>역사적 인물</h4>
-            <ul>${type.famous.historical.map(p => `<li>${p}</li>`).join('')}</ul>
+            <ul>${type.famous.historical.map(p => renderFamousListItem(p)).join('')}</ul>
         </div>
         <div class="famous-category">
             <h4>현대인</h4>
-            <ul>${type.famous.modern.map(p => `<li>${p}</li>`).join('')}</ul>
+            <ul>${type.famous.modern.map(p => renderFamousListItem(p)).join('')}</ul>
         </div>
         <div class="famous-category">
             <h4>가상 인물</h4>
-            <ul>${type.famous.fictional.map(p => `<li>${p}</li>`).join('')}</ul>
+            <ul>${type.famous.fictional.map(p => renderFamousListItem(p)).join('')}</ul>
         </div>
     `;
     
@@ -371,19 +387,19 @@ function displayResult(typeCode, scores) {
         ${dangerHtml}
     `;
     
-    // Recommendations
+    // Recommendations — desc 포함 렌더링
     document.getElementById('recommendations').innerHTML = `
         <div class="rec-category">
             <h4>📚 책</h4>
-            <ul>${type.recommendations.books.map(b => `<li><strong>${b.title}</strong><span>${b.author}</span></li>`).join('')}</ul>
+            <ul>${type.recommendations.books.map(b => `<li><strong>${b.title}</strong><span>${b.author}</span>${b.desc ? `<span class="rec-desc">${b.desc}</span>` : ''}</li>`).join('')}</ul>
         </div>
         <div class="rec-category">
             <h4>🎬 영화/드라마</h4>
-            <ul>${type.recommendations.movies.map(m => `<li><strong>${m.title}</strong><span>${m.desc}</span></li>`).join('')}</ul>
+            <ul>${type.recommendations.movies.map(m => `<li><strong>${m.title}</strong>${m.desc ? `<span class="rec-desc">${m.desc}</span>` : ''}</li>`).join('')}</ul>
         </div>
         <div class="rec-category">
             <h4>🎵 음악</h4>
-            <ul>${type.recommendations.music.map(m => `<li><strong>${m.title}</strong><span>${m.artist}</span></li>`).join('')}</ul>
+            <ul>${type.recommendations.music.map(m => `<li><strong>${m.title}</strong><span>${m.artist}</span>${m.desc ? `<span class="rec-desc">${m.desc}</span>` : ''}</li>`).join('')}</ul>
         </div>
     `;
     
@@ -673,9 +689,9 @@ function viewType(typeCode) {
         
         <div class="type-detail-section">
             <h3>같은 유형의 인물들</h3>
-            <p><strong>역사적 인물:</strong> ${type.famous.historical.join(', ')}</p>
-            <p><strong>현대인:</strong> ${type.famous.modern.join(', ')}</p>
-            <p><strong>가상 인물:</strong> ${type.famous.fictional.join(', ')}</p>
+            <p><strong>역사적 인물:</strong> ${type.famous.historical.map(p => renderFamousName(p)).join(', ')}</p>
+            <p><strong>현대인:</strong> ${type.famous.modern.map(p => renderFamousName(p)).join(', ')}</p>
+            <p><strong>가상 인물:</strong> ${type.famous.fictional.map(p => renderFamousName(p)).join(', ')}</p>
         </div>
     `;
     

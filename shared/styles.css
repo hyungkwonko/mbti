@@ -152,12 +152,8 @@ body {
     background: var(--bg-secondary);
     border: 1px solid var(--border-color);
     border-radius: 12px;
-    transition: var(--transition-smooth);
     text-align: left;
-}
-
-.axis-item:hover {
-    border-color: var(--text-muted);
+    cursor: default;
 }
 
 .axis-label {
@@ -918,12 +914,26 @@ body {
 .famous-category li {
     font-size: 0.95rem;
     color: var(--text-secondary);
-    padding: 6px 0;
+    padding: 8px 0;
     border-bottom: 1px solid var(--border-color);
 }
 
 .famous-category li:last-child {
     border-bottom: none;
+}
+
+.famous-category li strong {
+    display: block;
+    color: var(--text-primary);
+    font-weight: 500;
+    margin-bottom: 2px;
+}
+
+.famous-category li span {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    line-height: 1.5;
 }
 
 /* Warning Signs */
@@ -1021,6 +1031,14 @@ body {
     display: block;
     font-size: 0.8rem;
     color: var(--text-muted);
+}
+
+.rec-category li .rec-desc {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-top: 4px;
+    line-height: 1.5;
 }
 
 /* Result Actions */
