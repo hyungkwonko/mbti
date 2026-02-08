@@ -19,11 +19,14 @@
             --bg-primary: #0a0a0a;
             --bg-secondary: #111111;
             --bg-tertiary: #1a1a1a;
-            --text-primary: #ffffff;
-            --text-secondary: #999999;
+            --text-primary: #f0f0f0;
+            --text-secondary: #a0a0a0;
             --text-muted: #555555;
-            --border-color: #222222;
-            --accent-primary: #ffffff;
+            --border-color: #1e1e1e;
+            --border-color-hover: #333333;
+            --accent-warm: #d4a574;
+            --accent-warm-dim: rgba(212, 165, 116, 0.15);
+            --gradient-gold: linear-gradient(135deg, #e8d5b7 0%, #a08060 50%, #e8d5b7 100%);
             --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             --font-main: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
         }
@@ -36,6 +39,11 @@
             box-sizing: border-box;
         }
 
+        html {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
         body {
             font-family: var(--font-main);
             background: var(--bg-primary);
@@ -45,32 +53,74 @@
             align-items: center;
             justify-content: center;
             padding: 24px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 50% 0%, rgba(212, 165, 116, 0.04) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 100%, rgba(212, 165, 116, 0.02) 0%, transparent 40%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        ::selection {
+            background: rgba(212, 165, 116, 0.25);
+            color: var(--text-primary);
         }
 
         .container {
             text-align: center;
-            max-width: 500px;
+            max-width: 460px;
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .badge {
             display: inline-block;
-            font-size: 0.75rem;
+            font-size: 0.72rem;
             font-weight: 500;
-            letter-spacing: 0.05em;
-            color: var(--text-muted);
-            background: var(--bg-tertiary);
-            padding: 8px 16px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--accent-warm);
+            background: var(--accent-warm-dim);
+            padding: 7px 16px;
             border-radius: 20px;
             margin-bottom: 32px;
-            border: 1px solid var(--border-color);
+            border: 1px solid rgba(212, 165, 116, 0.2);
+            animation: fadeInUp 0.6s ease-out 0s both;
         }
 
         h1 {
-            font-size: clamp(1.8rem, 6vw, 2.5rem);
+            font-size: clamp(1.5rem, 5vw, 2rem);
             font-weight: 600;
-            letter-spacing: -0.03em;
+            letter-spacing: -0.02em;
             line-height: 1.3;
             margin-bottom: 16px;
+            animation: fadeInUp 0.6s ease-out 0.1s both;
+        }
+
+        .title-ko {
+            font-size: 0.65em;
+            font-weight: 400;
+            color: var(--text-secondary);
+            letter-spacing: 0;
         }
 
         .subtitle {
@@ -78,12 +128,14 @@
             color: var(--text-secondary);
             margin-bottom: 48px;
             line-height: 1.6;
+            animation: fadeInUp 0.6s ease-out 0.2s both;
         }
 
         .language-options {
             display: flex;
             flex-direction: column;
-            gap: 16px;
+            gap: 12px;
+            animation: fadeInUp 0.6s ease-out 0.3s both;
         }
 
         .lang-btn {
@@ -102,12 +154,13 @@
         }
 
         .lang-btn:hover {
-            border-color: var(--text-muted);
+            border-color: var(--accent-warm);
             background: var(--bg-tertiary);
+            box-shadow: 0 0 20px rgba(212, 165, 116, 0.06);
         }
 
         .lang-btn.disabled {
-            opacity: 0.5;
+            opacity: 0.4;
             cursor: not-allowed;
             pointer-events: none;
         }
@@ -115,11 +168,12 @@
         .lang-info {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 14px;
         }
 
         .lang-flag {
             font-size: 1.5rem;
+            line-height: 1;
         }
 
         .lang-text {
@@ -129,39 +183,56 @@
         .lang-name {
             font-weight: 500;
             display: block;
+            margin-bottom: 2px;
         }
 
         .lang-native {
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             color: var(--text-secondary);
         }
 
+        .lang-arrow {
+            color: var(--text-muted);
+            transition: var(--transition-smooth);
+            flex-shrink: 0;
+        }
+
+        .lang-btn:hover .lang-arrow {
+            color: var(--accent-warm);
+            transform: translateX(3px);
+        }
+
         .lang-status {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
+            font-weight: 500;
             color: var(--text-muted);
             padding: 4px 10px;
             background: var(--bg-tertiary);
             border-radius: 12px;
+            letter-spacing: 0.03em;
         }
 
         .lang-status.available {
-            color: #10b981;
-            background: rgba(16, 185, 129, 0.1);
+            color: var(--accent-warm);
+            background: var(--accent-warm-dim);
+            border: 1px solid rgba(212, 165, 116, 0.15);
         }
 
         .footer {
             margin-top: 60px;
             font-size: 0.8rem;
             color: var(--text-muted);
+            animation: fadeInUp 0.6s ease-out 0.4s both;
         }
 
         .footer a {
             color: var(--text-secondary);
             text-decoration: none;
+            transition: color 0.2s;
         }
 
         .footer a:hover {
-            color: var(--text-primary);
+            color: var(--accent-warm);
         }
     </style>
 </head>
@@ -169,7 +240,7 @@
 <body>
     <div class="container">
         <div class="badge">Personality Test</div>
-        <h1>마음 좌표 테스트</h1>
+        <h1>Mind Coordinates<br><span class="title-ko">마음 좌표 테스트</span></h1>
         <p class="subtitle">
             Select your language<br>
             언어를 선택하세요
