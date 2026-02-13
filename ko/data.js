@@ -18,15 +18,15 @@ const questions = [
     { id: 12, text: "요즘 특별한 이유 없이 기분이 가라앉을 때가 있다", axis: "experience", reverse: true },
 
     // 축3: 정답 신념 (13-18) - 삶에 옳은 길/정답이 있다고 믿는가
-    { id: 13, text: "SNS에서 논쟁이 벌어져도 내가 보기엔 답은 명확한 경우가 많다", axis: "belief", reverse: false },
+    { id: 13, text: "아무리 시대가 바뀌어도 변하지 않는 가치가 있다고 생각한다", axis: "belief", reverse: false },
     { id: 14, text: "나이대별로 해야 할 것들이 어느 정도 정해져 있다고 생각한다", axis: "belief", reverse: false },
     { id: 15, text: "선택지가 많으면 불안하기 보다 자유로운 느낌이 든다", axis: "belief", reverse: true },
-    { id: 16, text: "'상식'이라고 불리는 것들도 의심해볼 필요가 있다", axis: "belief", reverse: true },
-    { id: 17, text: "남들이 뭐라 하든 내 선택이 나한테 맞으면 그게 정답이다", axis: "belief", reverse: true },
+    { id: 16, text: "'노력하면 된다'랑 '될 놈은 된다' 둘 다 맞는 것 같다", axis: "belief", reverse: true },
+    { id: 17, text: "남들 눈치 볼 것 없이 내 선택이 나한테 맞으면 그게 정답이다", axis: "belief", reverse: true },
     { id: 18, text: "사람마다 답이 다르다고 하면서도, 속으로는 '그래도 이게 맞지 않나' 싶을 때가 많다", axis: "belief", reverse: false },
     
     // 축4: 추구 에너지 (19-24) - 더 나은 것을 적극 추구하는가
-    { id: 19, text: "좋아하는 아티스트 콘서트라도 티켓팅 전쟁까지 하면서 가고 싶진 않다", axis: "energy", reverse: true },
+    { id: 19, text: "맛집 웨이팅, 콘서트 티켓팅 전쟁, 오픈런 같은 거 그렇게까지 해서 가고 싶진 않다", axis: "energy", reverse: true },
     { id: 20, text: "팀플 분위기가 늘어지면 누가 챙기겠지보다 내가 먼저 마감 얘기 꺼낸다", axis: "energy", reverse: false },
     { id: 21, text: "바꾸고 싶은 게 있어도 막상 행동으로 옮기는 건 잘 안 하게 된다", axis: "energy", reverse: true },
     { id: 22, text: "뭔가 해보고 싶다는 생각이 들면 그날 안에 뭐라도 하나는 해놓는 편이다", axis: "energy", reverse: false },
